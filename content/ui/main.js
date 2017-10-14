@@ -70,7 +70,7 @@ function isValidInput(command, parameters){
             break;
         }
     }
-    if(param_missing) return "Missing required parameters for " + prefix + command + ". Use '" + prefix + "help -c command' for more information.";
+    if(param_missing) return "Missing required parameters for '" + prefix + command + "'. Use '" + prefix + "help -c command' for more information.";
 
     //CHECK FOR UNKNOWN PARAMETERS
     var unknown_param_found = false;
@@ -90,7 +90,7 @@ function isValidInput(command, parameters){
         }
         if(unknown_param_found) break;
     }
-    if(unknown_param_found) return "Unknown parameter used for " + prefix + command + ". Use '" + prefix + "help -c command' for more information.";
+    if(unknown_param_found) return "Unknown parameter used for '" + prefix + command + "'. Use '" + prefix + "help -c command' for more information.";
 
     return true;
 }
