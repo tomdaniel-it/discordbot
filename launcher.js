@@ -1,0 +1,1 @@
+require(__dirname + '/content/ui/main.js');
