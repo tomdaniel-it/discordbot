@@ -3,10 +3,19 @@ module.exports = {
         var params = command.getParameters();
         if(params.length==0){
             //GIVE HELP ABOUT ALL COMMANDS
+            var author = command.getMessage().author;
+            var content = "Help has arrived. Here is a list of all possible commands:\n";
+            var commandlist = require("../storage/commands.js");
+            for(var i=0;i<commandlist.length;i++){
+                content += "\n"+command.getPrefix()+commandlist[i].command+": "+commandlist[i].description;
+            }
+            content += "\n\nFor more information about a command, type '"+command.getPrefix()+"help -c command'.";
+            command.getMessage().author.send(content);
         }else{
             //GIVE HELP ABOUT THE COMMAND IN PARAM WITH KEY c
             var author = command.getMessage().author;
             var com = params[0].value.trim();
+            if(com.substring(0,1)===".")com=com.substring(1);
             var content = "Help has arrived for the command " + command.getPrefix() + com + ":";
             var commandlist = require("../storage/commands.js");
             for(var i=0;i<commandlist.length;i++){
@@ -38,8 +47,6 @@ module.exports = {
                     content += commandlist.optional_params[i].description;
                 }
             }
-            
-
 
             command.getMessage().author.send(content);
         }
