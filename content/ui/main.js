@@ -1,4 +1,5 @@
 const Command = require("../domain/Command.js");
+const CommandHandler = require("../domain/CommandHandler.js");
 const commandlist = require("../storage/commands.js");
 
 const Discord = require('discord.js');
@@ -31,7 +32,9 @@ bot.on('message', message=>{ //MESSAGE SENT
         return;
     }
 
-    message.channel.send("I accepted your command.");return;
+    //HANDLE COMMAND
+    commandhandler = new CommandHandler(command);
+    commandhandler.run();
     
 });
 

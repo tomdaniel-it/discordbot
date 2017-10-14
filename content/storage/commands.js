@@ -20,10 +20,10 @@ module.exports = [
     {
         command:"help",
         description:"Shows information about a command.",
-        required_params:[
+        required_params:[],
+        optional_params:[
             {key:"c",description:"The command to retrieve help about."}
-        ],
-        optional_params:[]
+        ]
     }
 
 ];

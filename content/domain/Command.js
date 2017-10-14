@@ -58,4 +58,8 @@ module.exports = class Command{
         getCommand(){
             return this.command;
         }
+
+        getPrefix(){
+            return this.prefix;
+        }
     };
