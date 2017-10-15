@@ -4,7 +4,7 @@ const commandlist = require("../storage/commands.js");
 
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-var prefix = '.';
+var prefix = require('../../settings.js').command_prefix;
 var result;
 
 bot.on('ready', ()=>{ //BOT LAUNCHED

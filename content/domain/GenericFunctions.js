@@ -1,6 +1,6 @@
 module.exports = {
     sendErrorMessage: function(command, content){
-        var timeUntilDeletion = 5; //IN SECONDS
+        var timeUntilDeletion = require('../../settings.js').error_message_time_until_deletion; //IN SECONDS
         var errorMessageAttachment = " (deleting message in " + timeUntilDeletion + " seconds...)";
         content += (command.getMessage().deletable?errorMessageAttachment:"");
         command.getMessage().channel.send(content).then(message => 
