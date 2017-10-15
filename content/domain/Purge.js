@@ -16,6 +16,9 @@ module.exports = {
             if(messagecount>100){
                 require('../domain/GenericFunctions.js').sendErrorMessage(command, "Purge amount has a max. of 99 messages.");
                 return;
+            }else if(messagecount < 1){
+                require('../domain/GenericFunctions.js').sendErrorMessage(command, "Purge amount has a min. of 1 message.");
+                return;
             }
             message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
             return;
