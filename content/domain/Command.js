@@ -14,7 +14,7 @@ module.exports = class Command{
             if(!regex.test(text)){
                 return "That's not how it works! (-_-) Ex: .command -p parameter --name Bob";
             }
-            this.command = regex.exec(text)[1];
+            this.command = regex.exec(text)[1].toLowerCase();
             text = regex.exec(text)[2].trim();
             this.params = [];
             while(true){
