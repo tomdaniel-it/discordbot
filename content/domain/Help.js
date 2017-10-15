@@ -4,19 +4,23 @@ module.exports = {
         if(params.length==0){
             //GIVE HELP ABOUT ALL COMMANDS
             var author = command.getMessage().author;
-            var content = "Help has arrived. Here is a list of all possible commands:\n";
+            var content = "----------------------------------------------------------\n";
+            content += "Help has arrived. Here is a list of all possible commands:\n";
             var commandlist = require("../storage/commands.js");
             for(var i=0;i<commandlist.length;i++){
                 content += "\n"+command.getPrefix()+commandlist[i].command+": "+commandlist[i].description;
             }
             content += "\n\nFor more information about a command, type '"+command.getPrefix()+"help -c command'.";
             command.getMessage().author.send(content);
+            require('../domain/GenericFunctions.js').deleteMessage(command.getMessage());
+            return;
         }else{
             //GIVE HELP ABOUT THE COMMAND IN PARAM WITH KEY c
             var author = command.getMessage().author;
             var com = params[0].value.trim();
             if(com.substring(0,1)===".")com=com.substring(1);
-            var content = "Help has arrived for the command " + command.getPrefix() + com + ":";
+            var content = "----------------------------------------------------------\n";
+            content += "Help has arrived for the command " + command.getPrefix() + com + ":";
             var commandlist = require("../storage/commands.js");
             for(var i=0;i<commandlist.length;i++){
                 if(commandlist[i].command===com){
@@ -24,7 +28,7 @@ module.exports = {
                 }
             }
             if(commandlist.description===undefined){
-                command.getMessage().channel.send("I can't offer help for a command I don't know.");
+                require('../domain/GenericFunctions.js').sendErrorMessage(command, "I can't offer help for a command I don't know.");
                 return;
             }
             content += "\n\nDescription: "+commandlist.description;
@@ -49,6 +53,8 @@ module.exports = {
             }
 
             command.getMessage().author.send(content);
+            require('../domain/GenericFunctions.js').deleteMessage(command.getMessage());
+            return;
         }
     }
 };

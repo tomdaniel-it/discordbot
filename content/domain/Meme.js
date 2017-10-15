@@ -16,6 +16,5 @@ module.exports = {
             filename = filenames[Math.floor(Math.random()*filenames.length)];
         }
         command.getMessage().channel.send("", {file:"content/storage/memes/"+filename});
-
     }
 };

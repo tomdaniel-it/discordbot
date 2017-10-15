@@ -21,6 +21,14 @@ module.exports = class CommandHandler{
                 var meme_command = require('../domain/Meme.js');
                 meme_command.execute(this.command);
                 break;
+            case "fancy":
+                var fancy_command = require('../domain/Fancy.js');
+                fancy_command.execute(this.command);
+                break;
+            case "purge":
+                var purge_command = require('../domain/Purge.js');
+                purge_command.execute(this.command);
+                break;
             default:
                 return;
         }

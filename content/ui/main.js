@@ -28,7 +28,7 @@ bot.on('message', message=>{ //MESSAGE SENT
 
     result = isValidInput(command.getCommand(), command.getParameters());
     if(result!==true){
-        message.channel.send(result);
+        require('../domain/GenericFunctions.js').sendErrorMessage(command, result);
         return;
     }
 
@@ -59,39 +59,51 @@ function isValidInput(command, parameters){
 
     //CHECK FOR REQUIRED PARAMETERS
     var param_missing = false;
+    var missing_params = [];
     for(var i=0;i<commandItem.required_params.length;i++){
         var param_key = commandItem.required_params[i].key;
         var param_found = false;
+        missing_params.push(param_key);
         for(var j=0;j<parameters.length;j++){
             if(param_key===parameters[j].key){
                 param_found = true;
-                break;
+                missing_params.splice(missing_params.indexOf(param_key));
             }
         }
         if(!param_found){
             param_missing = true;
-            break;
         }
     }
-    if(param_missing) return "Missing required parameters for '" + prefix + command + "'. Use '" + prefix + "help -c command' for more information.";
+    if(param_missing){
+        var cont = "Missing required parameters for '" + prefix + command + "'. Use '" + prefix + "help -c command' for more information.";
+        cont += "\nMissing: ";
+        for(var i=0;i<missing_params.length;i++){
+            cont += "-" + missing_params[i] + "  ";
+        }
+        return cont;
+    }
 
     //CHECK FOR UNKNOWN PARAMETERS
     var unknown_param_found = false;
     for(var i=0;i<parameters.length;i++){
+        var found = false;
         for(var j=0;j<commandItem.required_params.length;j++){
-            if(parameters[i].key!==commandItem.required_params[j].key){
-                unknown_param_found = true;
+            if(parameters[i].key===commandItem.required_params[j].key){
+                found = true;
                 break;
             }
         }
         if(unknown_param_found) break;
         for(var j=0;j<commandItem.optional_params.length;j++){
-            if(parameters[i].key!==commandItem.optional_params[j].key){
-                unknown_param_found = true;
+            if(parameters[i].key===commandItem.optional_params[j].key){
+                found = true;
                 break;
             }
         }
-        if(unknown_param_found) break;
+        if(!found) {
+            unknown_param_found = true;
+            break;
+        }
     }
     if(unknown_param_found) return "Unknown parameter used for '" + prefix + command + "'. Use '" + prefix + "help -c command' for more information.";
 
