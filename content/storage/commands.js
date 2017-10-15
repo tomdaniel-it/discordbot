@@ -3,7 +3,8 @@ module.exports = [
         command:"ping",
         description:"Answers with pong",
         required_params:[],
-        optional_params:[]
+        optional_params:[],
+        disabled: false,
     },
     {
         command:"help",
@@ -11,7 +12,8 @@ module.exports = [
         required_params:[],
         optional_params:[
             {key:"c",description:"The command to retrieve help about."}
-        ]
+        ],
+        disabled: false,
     },
     {
         command:"insult",
@@ -19,13 +21,15 @@ module.exports = [
         required_params:[],
         optional_params:[
             {key:"p",description:"The person to direct the insult to (Works with @person)."}
-        ]
+        ],
+        disabled: false,
     },
     {
         command:"meme",
         description:"Sends a random meme.",
         required_params:[],
-        optional_params:[]
+        optional_params:[],
+        disabled: false,
     },
     {
         command:"fancy",
@@ -34,7 +38,8 @@ module.exports = [
             {key:"style",description:"f for random font, d for random decoration, fd for both."},
             {key:"message", description:"The message to be made fancy."}
         ],
-        optional_params:[]
+        optional_params:[],
+        disabled: false,
     },
     {
         command:"purge",
@@ -42,7 +47,9 @@ module.exports = [
         required_params:[],
         optional_params:[
             {key:"amount",description:"The amount of messages to delete starting from the latest (excluding purge command) (MAX 99)."},
-            {key:"user", description:"Choose a specific person to delete messages from."}]
+            {key:"user", description:"Choose a specific person to delete messages from."}
+        ],
+        disabled: true,
     },
 
 

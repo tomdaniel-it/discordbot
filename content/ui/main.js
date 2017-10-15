@@ -56,6 +56,7 @@ function isValidInput(command, parameters){
     }
     if(command_id===-1) return "I don't know that command :c";
     var commandItem = commandlist[i];
+    if(commandItem.disabled) return "The command " + prefix + command + " is disabled.";
 
     //CHECK FOR REQUIRED PARAMETERS
     var param_missing = false;

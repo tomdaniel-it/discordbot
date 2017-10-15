@@ -8,6 +8,7 @@ module.exports = {
             content += "Help has arrived. Here is a list of all possible commands:\n";
             var commandlist = require("../storage/commands.js");
             for(var i=0;i<commandlist.length;i++){
+                if(commandlist[i].disabled) continue;
                 content += "\n"+command.getPrefix()+commandlist[i].command+": "+commandlist[i].description;
             }
             content += "\n\nFor more information about a command, type '"+command.getPrefix()+"help -c command'.";
@@ -29,6 +30,10 @@ module.exports = {
             }
             if(commandlist.description===undefined){
                 require('../domain/GenericFunctions.js').sendErrorMessage(command, "I can't offer help for a command I don't know.");
+                return;
+            }
+            if(commandlist.disabled){
+                require('../domain/GenericFunctions.js').sendErrorMessage(command, "I'm not allowed to give help for " + command.getPrefix() + com + " because it is disabled.");
                 return;
             }
             content += "\n\nDescription: "+commandlist.description;
