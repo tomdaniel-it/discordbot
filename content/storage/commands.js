@@ -58,7 +58,7 @@ module.exports = [
             {key:"message",description:"The message to say."},
         ],
         optional_params:[],
-        disabled: true,
+        disabled: false,
     },
     {
         command:"music_play",
