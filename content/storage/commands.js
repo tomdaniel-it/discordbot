@@ -49,7 +49,25 @@ module.exports = [
             {key:"amount",description:"The amount of messages to delete starting from the latest (excluding purge command) (MAX 99)."},
             {key:"user", description:"Choose a specific person to delete messages from."}
         ],
+        disabled: false,
+    },
+    {
+        command:"say",
+        description:"Says a message with text to speach.",
+        required_params:[
+            {key:"message",description:"The message to say."},
+        ],
+        optional_params:[],
         disabled: true,
+    },
+    {
+        command:"music_play",
+        description:"Plays music",
+        required_params:[
+            {key:"url",description:"The url of the music."},
+        ],
+        optional_params:[],
+        disabled: false,
     },
 
 

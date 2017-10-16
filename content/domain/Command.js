@@ -10,7 +10,7 @@ module.exports = class Command{
         createParameters(){
             var text = this.message;
             
-            var regex = new RegExp("^\\" + this.prefix + "([a-zA-Z]+)(.*)$");
+            var regex = new RegExp("^\\" + this.prefix + "([a-zA-Z_\.]+)(.*)$");
             if(!regex.test(text)){
                 return "That's not how it works! (-_-) Ex: .command -p parameter --name Bob";
             }

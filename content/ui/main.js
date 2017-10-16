@@ -15,8 +15,6 @@ bot.on('ready', ()=>{ //BOT LAUNCHED
 
 bot.on('message', message=>{ //MESSAGE SENT
     if(message.author.id === '368465430924230670') return;
-
-
     if(message.content.indexOf(prefix)!==0) return;
 
     var command = new Command(message, prefix);

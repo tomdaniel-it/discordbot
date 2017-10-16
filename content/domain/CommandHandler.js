@@ -29,6 +29,14 @@ module.exports = class CommandHandler{
                 var purge_command = require('../domain/Purge.js');
                 purge_command.execute(this.command);
                 break;
+            case "say":
+                var say_command = require('../domain/Say.js');
+                say_command.execute(this.command);
+                break;
+            case "music_play":
+                var music_play_command = require('../domain/MusicPlay.js');
+                music_play_command.execute(this.command);
+                break;
             default:
                 return;
         }

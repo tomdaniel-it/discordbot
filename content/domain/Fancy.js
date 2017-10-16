@@ -9,6 +9,7 @@ module.exports = {
         var fontWanted = false;
         var decorationWanted = false;
 
+
         for(var i=0;i<2;i++){
             if(params[i].key=="style"){
                 if(params[i].value.indexOf('f')!==-1) fontWanted = true;
@@ -45,6 +46,7 @@ module.exports = {
 
         //if(command.getMessage().channel.type!=="dm")command.getMessage().delete();
         command.getMessage().channel.send(message + "  -" + command.getMessage().author.username);
+        require('../domain/GenericFunctions.js').deleteMessage(command.getMessage());
         return;
 
     }
