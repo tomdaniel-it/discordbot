@@ -57,7 +57,8 @@ module.exports = [
         required_params:[
             {key:"message",description:"The message to say."},
         ],
-        optional_params:[],
+        optional_params:[
+            {key:"lang",description:"The language to say the message in. Choices: english, french, dutch, german, korean, russian, italian, spanish."},],
         disabled: false,
     },
     {
@@ -66,6 +67,13 @@ module.exports = [
         required_params:[
             {key:"url",description:"The url of the music."},
         ],
+        optional_params:[],
+        disabled: false,
+    },
+    {
+        command:"coinflip",
+        description:"Flips a coin.",
+        required_params:[],
         optional_params:[],
         disabled: false,
     },

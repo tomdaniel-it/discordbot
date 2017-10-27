@@ -4,38 +4,43 @@ module.exports = class CommandHandler{
     }
 
     run(){
+        var command_dir = "../domain/commands/";
         switch(this.command.getCommand()){
             case "ping":
-                var ping_command = require('../domain/Ping.js');
+                var ping_command = require(command_dir + 'Ping.js');
                 ping_command.execute(this.command);
                 break;
             case "help":
-                var help_command = require('../domain/Help.js');
+                var help_command = require(command_dir + 'Help.js');
                 help_command.execute(this.command);
                 break;
             case "insult":
-                var insult_command = require('../domain/Insult.js');
+                var insult_command = require(command_dir + 'Insult.js');
                 insult_command.execute(this.command);
                 break;
             case "meme":
-                var meme_command = require('../domain/Meme.js');
+                var meme_command = require(command_dir + 'Meme.js');
                 meme_command.execute(this.command);
                 break;
             case "fancy":
-                var fancy_command = require('../domain/Fancy.js');
+                var fancy_command = require(command_dir + 'Fancy.js');
                 fancy_command.execute(this.command);
                 break;
             case "purge":
-                var purge_command = require('../domain/Purge.js');
+                var purge_command = require(command_dir + 'Purge.js');
                 purge_command.execute(this.command);
                 break;
             case "say":
-                var say_command = require('../domain/Say.js');
+                var say_command = require(command_dir + 'Say.js');
                 say_command.execute(this.command);
                 break;
             case "music_play":
-                var music_play_command = require('../domain/MusicPlay.js');
+                var music_play_command = require(command_dir + 'MusicPlay.js');
                 music_play_command.execute(this.command);
+                break;
+            case "coinflip":
+                var coinflip_command = require(command_dir + 'Coinflip.js');
+                coinflip_command.execute(this.command);
                 break;
             default:
                 return;
