@@ -1,100 +1,6 @@
-var fs = require('fs');
-var readline = require('readline');
-var google = require('googleapis');
-var googleAuth = require('google-auth-library');
-var oauth2Client;
 var http = require("http");
 var https = require("https");
 var emitter = require('events').EventEmitter;
-
-// If modifying these scopes, delete your previously saved credentials
-// at ~/.credentials/youtube-nodejs-quickstart.json
-var SCOPES = ['https://www.googleapis.com/auth/youtube.readonly'];
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/.credentials/';
-var TOKEN_PATH = TOKEN_DIR + 'youtube-nodejs-quickstart.json';
-
-// Load client secrets from a local file.
-fs.readFile('content/domain/client_secret.json', function processClientSecrets(err, content) {
-  if (err) {
-    console.log('Error loading client secret file: ' + err);
-    return;
-  }
-  // Authorize a client with the loaded credentials, then call the YouTube API.
-  authorize(JSON.parse(content));
-});
-
-/**
- * Create an OAuth2 client with the given credentials, and then execute the
- * given callback function.
- *
- * @param {Object} credentials The authorization client credentials.
- * @param {function} callback The callback to call with the authorized client.
- */
-function authorize(credentials) {
-  var clientSecret = credentials.installed.client_secret;
-  var clientId = credentials.installed.client_id;
-  var redirectUrl = credentials.installed.redirect_uris[0];
-  var auth = new googleAuth();
-  oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
-
-  // Check if we have previously stored a token.
-  fs.readFile(TOKEN_PATH, function(err, token) {
-    if (err) {
-      getNewToken(oauth2Client, callback);
-    } else {
-      oauth2Client.credentials = JSON.parse(token);
-    }
-  });
-}
-
-/**
- * Get and store new token after prompting for user authorization, and then
- * execute the given callback with the authorized OAuth2 client.
- *
- * @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback to call with the authorized
- *     client.
- */
-function getNewToken(oauth2Client, callback) {
-  var authUrl = oauth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: SCOPES
-  });
-  console.log('Authorize this app by visiting this url: ', authUrl);
-  var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-  rl.question('Enter the code from that page here: ', function(code) {
-    rl.close();
-    oauth2Client.getToken(code, function(err, token) {
-      if (err) {
-        console.log('Error while trying to retrieve access token', err);
-        return;
-      }
-      oauth2Client.credentials = token;
-      storeToken(token);
-      callback(oauth2Client);
-    });
-  });
-}
-
-/**
- * Store token to disk be used in later program executions.
- *
- * @param {Object} token The token to store to disk.
- */
-function storeToken(token) {
-  try {
-    fs.mkdirSync(TOKEN_DIR);
-  } catch (err) {
-    if (err.code != 'EEXIST') {
-      throw err;
-    }
-  }
-  fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-}
 
 function getJSON(options, onResult)
 {
@@ -139,7 +45,7 @@ function isoToString(iso){
 var optionsSearch = {
     host: 'www.googleapis.com',
     port: 443,
-    path: '/youtube/v3/search?maxResults=5&part=snippet&q={question}&type=&key=AIzaSyAj-fwlb1KKY-BwXopLEbsE9i3VE2OnubE&order=relevance',
+    path: '/youtube/v3/search?maxResults=5&part=snippet&q={question}&type=&order=relevance&key=' + require('../../keys.js').youtube_api_key,
     method: 'GET',
     headers: {
         'Content-Type': 'application/json'
@@ -149,7 +55,7 @@ var optionsSearch = {
 var optionsInfo = {
     host: 'www.googleapis.com',
     port: 443,
-    path: '/youtube/v3/videos?id={id}&part=contentDetails,snippet&key=AIzaSyAj-fwlb1KKY-BwXopLEbsE9i3VE2OnubE',
+    path: '/youtube/v3/videos?id={id}&part=contentDetails,snippet&key=' + require('../../keys.js').youtube_api_key,
     method: 'GET',
     headers: {
         'Content-Type': 'application/json'
