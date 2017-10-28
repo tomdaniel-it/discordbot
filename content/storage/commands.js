@@ -1,7 +1,7 @@
 module.exports = [
     {
         command:"ping",
-        description:"Answers with pong",
+        description:"Answers with pong.",
         required_params:[],
         optional_params:[],
         disabled: false,
@@ -43,7 +43,7 @@ module.exports = [
     },
     {
         command:"purge",
-        description:"Deletes messages from current channel (DEFAULT ALL MESSAGES)",
+        description:"Deletes messages from current channel (DEFAULT ALL MESSAGES).",
         required_params:[],
         optional_params:[
             {key:"amount",description:"The amount of messages to delete starting from the latest (excluding purge command) (MAX 99)."},
@@ -62,17 +62,65 @@ module.exports = [
         disabled: false,
     },
     {
+        command:"coinflip",
+        description:"Flips a coin.",
+        required_params:[],
+        optional_params:[],
+        disabled: false,
+    },
+    {
         command:"music_play",
-        description:"Plays music",
+        description:"Starts playing music in the voice channel where the user is connected to.",
+        required_params:[],
+        optional_params:[],
+        disabled: false,
+    },
+    {
+        command:"music_stop",
+        description:"Stops playing music.",
+        required_params:[],
+        optional_params:[],
+        disabled: false,
+    },
+    {
+        command:"music_add",
+        description:"Add a song to the playlist.",
+        required_params:[],
+        optional_params:[
+            {key:"url",description:"Pick a song by a youtube url."},
+            {key:"find",description:"Pick a song by entering the title."},
+            {key:"position",description:"The position to place the song at in the playlist (1 = top)."},
+        ],
+        disabled: false,
+    },
+    {
+        command:"music_pick",
+        description:"Picks a song from the search results from the command 'music_add -find title'.",
         required_params:[
-            {key:"url",description:"The url of the music."},
+            {key:"num",description:"The number of the song to add from the search results."},
         ],
         optional_params:[],
         disabled: false,
     },
     {
-        command:"coinflip",
-        description:"Flips a coin.",
+        command:"music_skip",
+        description:"Skips the currently playing song.",
+        required_params:[],
+        optional_params:[],
+        disabled: false,
+    },
+    {
+        command:"music_purge",
+        description:"Removes songs from the playlist.",
+        required_params:[
+            {key:"amount",description:"The amount of songs to delete starting from top (DEFAULT ALL SONGS)."},
+        ],
+        optional_params:[],
+        disabled: false,
+    },
+    {
+        command:"music_list",
+        description:"Gives a list of all the songs queued in the playlist.",
         required_params:[],
         optional_params:[],
         disabled: false,

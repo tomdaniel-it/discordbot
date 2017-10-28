@@ -5,16 +5,25 @@ const commandlist = require("../storage/commands.js");
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 var prefix = require('../../settings.js').command_prefix;
+var genericfunctions = require("../domain/GenericFunctions.js");
 var result;
+
+var events = require('events'),
+util = require('util');
+
+process
+.once('SIGINT', () => process.exit(1))
+.once('SIGTERM', () => process.exit(1));
 
 bot.on('ready', ()=>{ //BOT LAUNCHED
     console.log('Bot launched...');
     bot.user.setStatus('Online'); //Status: 'Online', 'idle', 'invisible', 'dnd'
-    //bot.user.setGame('GameName') //Will display 'Playing xxx' under bot name
+    bot.user.setGame("'.help' for info") //Will display 'Playing xxx' under bot name
 });
 
 bot.on('message', message=>{ //MESSAGE SENT
     if(message.author.id === '368465430924230670') return;
+    if(message.system) return;
     if(message.content.indexOf(prefix)!==0) return;
 
     var command = new Command(message, prefix);
@@ -33,6 +42,7 @@ bot.on('message', message=>{ //MESSAGE SENT
     //HANDLE COMMAND
     commandhandler = new CommandHandler(command);
     commandhandler.run();
+    
     
 });
 
