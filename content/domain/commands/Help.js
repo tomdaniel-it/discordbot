@@ -1,3 +1,5 @@
+var genericfunctions = require('../GenericFunctions.js');
+
 module.exports = {
     execute: function(command){
         var params = command.getParameters();
@@ -13,7 +15,7 @@ module.exports = {
             }
             content += "\n\nFor more information about a command, type '"+command.getPrefix()+"help -c command'.";
             command.getMessage().author.send(content);
-            require('../../domain/GenericFunctions.js').deleteMessage(command.getMessage());
+            genericfunctions.deleteMessage(command.getMessage());
             return;
         }else{
             //GIVE HELP ABOUT THE COMMAND IN PARAM WITH KEY c
@@ -29,11 +31,11 @@ module.exports = {
                 }
             }
             if(commandlist.description===undefined){
-                require('../../domain/GenericFunctions.js').sendErrorMessage(command, "I can't offer help for a command I don't know.");
+                genericfunctions.sendErrorMessage(command, "I can't offer help for a command I don't know.");
                 return;
             }
             if(commandlist.disabled){
-                require('../../domain/GenericFunctions.js').sendErrorMessage(command, "I'm not allowed to give help for " + command.getPrefix() + com + " because it is disabled.");
+                genericfunctions.sendErrorMessage(command, "I'm not allowed to give help for " + command.getPrefix() + com + " because it is disabled.");
                 return;
             }
             content += "\n\nDescription: "+commandlist.description;
@@ -58,7 +60,7 @@ module.exports = {
             }
 
             command.getMessage().author.send(content);
-            require('../../domain/GenericFunctions.js').deleteMessage(command.getMessage());
+            genericfunctions.deleteMessage(command.getMessage());
             return;
         }
     }

@@ -1,3 +1,5 @@
+var genericfunctions = require('../GenericFunctions.js');
+
 module.exports = {
     execute: function(command){
         var fs = require('fs');
@@ -6,10 +8,10 @@ module.exports = {
         var params = command.getParameters();
         if(params.length==0){
             //SEND INSULT
-            command.getMessage().channel.send(insult);
+            genericfunctions.sendMessage(command, insult);
         }else{
             //SEND INSULT WITH PERSON (KEY p)
-            command.getMessage().channel.send(params[0].value + ", " + insult);
+            genericfunctions.sendMessage(command, params[0].value + ", " + insult);
         }
     }
 };

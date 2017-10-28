@@ -1,5 +1,7 @@
+var genericfunctions = require('../GenericFunctions.js');
+
 module.exports = {
     execute: function(command){
-        command.getMessage().channel.send("Pong");
+        genericfunctions.sendMessage(command, "Pong");
     }
 };

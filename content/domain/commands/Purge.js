@@ -1,7 +1,9 @@
+var genericfunctions = require('../GenericFunctions.js');
+
 module.exports = {
     execute: function(command){
         if(command.getMessage().channel.type!=="text"){
-            command.getMessage().channel.send("This is only possible in a text channel.");
+            genericfunctions.sendMessage(command, "This is only possible in a text channel.");
             return;
         }
         var message = command.getMessage();
@@ -15,14 +17,14 @@ module.exports = {
             //DELETE X MESSAGES OF CHANNEL
             var messagecount = Math.floor(Number(params[0].value))+1;
             if(isNaN(messagecount)){
-                require('../../domain/GenericFunctions.js').sendErrorMessage(command, "Purge amount requires a number of messages to delete.");
+                genericfunctions.sendErrorMessage(command, "Purge amount requires a number of messages to delete.");
                 return;
             }
             if(messagecount>100){
-                require('../../domain/GenericFunctions.js').sendErrorMessage(command, "Purge amount has a max. of 99 messages.");
+                genericfunctions.sendErrorMessage(command, "Purge amount has a max. of 99 messages.");
                 return;
             }else if(messagecount < 2){
-                require('../../domain/GenericFunctions.js').sendErrorMessage(command, "Purge amount has a min. of 1 message.");
+                genericfunctions.sendErrorMessage(command, "Purge amount has a min. of 1 message.");
                 return;
             }
             message.channel.fetchMessages({limit: messagecount}).then(messages => {
@@ -65,14 +67,14 @@ module.exports = {
         messagecount = Math.floor(Number(messagecount))+1;
         
         if(isNaN(messagecount)){
-            require('../../domain/GenericFunctions.js').sendErrorMessage(command, "Purge amount requires a number of messages to delete.");
+            genericfunctions.sendErrorMessage(command, "Purge amount requires a number of messages to delete.");
             return;
         }
         if(messagecount>100){
-            require('../../domain/GenericFunctions.js').sendErrorMessage(command, "Purge amount has a max. of 99 messages.");
+            genericfunctions.sendErrorMessage(command, "Purge amount has a max. of 99 messages.");
             return;
         }else if(messagecount < 2){
-            require('../../domain/GenericFunctions.js').sendErrorMessage(command, "Purge amount has a min. of 1 message.");
+            genericfunctions.sendErrorMessage(command, "Purge amount has a min. of 1 message.");
             return;
         }
 

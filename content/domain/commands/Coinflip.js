@@ -1,6 +1,8 @@
+var genericfunctions = require('../GenericFunctions.js');
+
 module.exports = {
     execute: function(command){
         var heads = Math.round(Math.random());
-        command.getMessage().channel.send(command.getMessage().author.username + " flipped " + (heads?"HEADS":"TAILS") + "!");
+        genericfunctions.sendMessage(command, command.getMessage().author.username + " flipped " + (heads?"HEADS":"TAILS") + "!");
     }
 };

@@ -1,3 +1,5 @@
+var genericfunctions = require('../GenericFunctions.js');
+
 module.exports = {
     execute: function(command){
         var fancylist = require("../../storage/fancylist.js");
@@ -17,7 +19,7 @@ module.exports = {
             }else if(params[i].key=="message"){
                 message = params[i].value;
             }else{
-                require('../../domain/GenericFunctions.js').sendErrorMessage(command, "Something went wrong :/");
+                genericfunctions.sendErrorMessage(command, "Something went wrong :/");
                 return;
             }
         }
@@ -45,8 +47,8 @@ module.exports = {
         }
 
         //if(command.getMessage().channel.type!=="dm")command.getMessage().delete();
-        command.getMessage().channel.send(message + "  -" + command.getMessage().author.username);
-        require('../../domain/GenericFunctions.js').deleteMessage(command.getMessage());
+        genericfunctions.sendMessage(command, message + "  -" + command.getMessage().author.username);
+        genericfunctions.deleteMessage(command.getMessage());
         return;
 
     }

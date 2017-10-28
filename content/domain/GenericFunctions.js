@@ -19,5 +19,8 @@ module.exports = {
     deleteMessage: function(message){
         if(message.deletable)
             message.delete();
+    },
+    sendMessage: function(command, content){
+        command.getMessage().channel.send(content);
     }
 }
