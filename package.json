@@ -15,7 +15,9 @@
   "dependencies": {
     "discord.js": "^11.2.1",
     "ffmpeg-binaries": "^3.2.2-3",
+    "google-auth-library": "^0.11.0",
     "google-tts-api": "0.0.2",
+    "googleapis": "^22.2.0",
     "node-gyp": "^3.6.2",
     "opusscript": "0.0.4",
     "proper-lockfile": "^2.0.1",
