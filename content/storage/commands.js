@@ -88,7 +88,7 @@ module.exports = [
         required_params:[],
         optional_params:[
             {key:"url",description:"Pick a song by a youtube url."},
-            {key:"find",description:"Pick a song by entering the title."},
+            {key:"search",description:"Pick a song by entering the title."},
             {key:"position",description:"The position to place the song at in the playlist (1 = top)."},
         ],
         disabled: false,

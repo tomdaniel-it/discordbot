@@ -1,5 +1,6 @@
 var emitter = require('events').EventEmitter;
 var queues = []; //[{connection: Connection, serverid:String, emitter: EventEmitter, playing:boolean, currentlyPlaying: {url:String, type:String, title:String, duration:String}, playlist:[{url:String, type:String, title:String, duration:String}] }]
+var musicplayer = require('../domain/MusicPlayer.js');
 
 function getQueue(serverid){
     serverid = serverid.toString();
@@ -61,7 +62,7 @@ function createSong(url, type, title, duration){
 function createConnection(channel){
     var em = new emitter();
     setTimeout(function(){
-        require('../domain/MusicPlayer.js').connect(channel).on('connected', connection=>{
+        musicplayer.connect(channel).on('connected', connection=>{
             em.emit("created", connection);
         });;
     }, 1);
@@ -98,7 +99,7 @@ function playSong(serverid, connection, song){
     var queue = getQueue(serverid);
     queue.playing = true;
     queue.emitter.emit('newsong', song);
-    var dispatcher = require('../domain/MusicPlayer.js').play(connection, song.url, song.type);
+    var dispatcher = musicplayer.play(connection, song.url, song.type);
     dispatcher.on('end', val=>{
         if(!queue.playing) return;
         var nextsong = getNextSong(queue);
@@ -130,8 +131,10 @@ module.exports = {
     }, 
     stop: function(serverid){
         serverid = serverid.toString();
+        var queue = getQueue(serverid);
+        queue.playing = false;
         var connection = getConnection(serverid);
-        setConnection(serverid, require('../domain/MusicPlayer.js').stop(connection));
+        setConnection(serverid, musicplayer.stop(connection));
     }, 
     purge: function(serverid, amount){
         //AMOUNT IS OPTIONAL, IF NULL => PURGE ALL
@@ -179,7 +182,7 @@ module.exports = {
                 return;
             }
         }, 1);
-        return em;
+        return em; //HAS .on('newsong', song=>{}) EVENT
     }, 
     add: function(serverid, song, position){
         //POSITION IS OPTIONAL, IF NULL => ADD TO BOTTOM OF QUEUE
@@ -198,5 +201,9 @@ module.exports = {
         var playlist = getQueue(serverid).playlist;
         playlist = (playlist===null?[]:playlist);
         return playlist; //RETURN [{title: String, duration: String}]
+    },
+    isPlaying: function(serverid){
+        serverid = serverid.toString();
+        return getQueue(serverid).playing;
     }
 };

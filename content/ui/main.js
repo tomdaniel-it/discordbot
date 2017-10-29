@@ -43,7 +43,6 @@ bot.on('message', message=>{ //MESSAGE SENT
     commandhandler = new CommandHandler(command);
     commandhandler.run();
     
-    
 });
 
 bot.on('guildMemberAdd', member=>{ //USER JOINS SERVER

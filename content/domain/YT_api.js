@@ -107,6 +107,7 @@ module.exports = {
             var regex = /v=([a-zA-Z0-9]+)/;
             if(!regex.test(url)){
                 em.emit('ready', null, new Error("Youtube url is incorrect."));
+                return;
             }
             var match = regex.exec(url);
             module.exports.getInfoById(match[1]).on('ready', (result, err)=>{

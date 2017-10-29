@@ -21,6 +21,6 @@ module.exports = {
             message.delete();
     },
     sendMessage: function(command, content){
-        command.getMessage().channel.send(content);
+        return command.getMessage().channel.send(content);
     }
 }
