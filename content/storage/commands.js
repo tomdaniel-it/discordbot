@@ -112,10 +112,10 @@ module.exports = [
     {
         command:"music_purge",
         description:"Removes songs from the playlist.",
-        required_params:[
+        required_params:[],
+        optional_params:[
             {key:"amount",description:"The amount of songs to delete starting from top (DEFAULT ALL SONGS)."},
         ],
-        optional_params:[],
         disabled: false,
     },
     {

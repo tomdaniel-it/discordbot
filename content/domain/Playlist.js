@@ -155,8 +155,7 @@ module.exports = {
         serverid = serverid.toString();
         var playlist = getQueue(serverid).playlist;
         if(amount === undefined || amount === null || amount >= playlist.length){
-            playlist = [];
-            return;
+            amount = playlist.length;
         }
         if(amount < 0) return;
         for(var i=0;i<amount;i++){
