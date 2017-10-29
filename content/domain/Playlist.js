@@ -132,11 +132,16 @@ module.exports = {
         var connection = getConnection(serverid);
         var song = getNextSong(getQueue(serverid));
         if(song===null){
-            module.exports.stop(serverid);
-            return;
+            if(getQueue(serverid).playing){
+                module.exports.stop(serverid);
+                return true;
+            }else{
+                return false;
+            }
         }
-        playSong(serverid, connection, song);
-        return;
+        if(getQueue(serverid).playing)
+            playSong(serverid, connection, song);
+        return true;
     }, 
     stop: function(serverid){
         serverid = serverid.toString();

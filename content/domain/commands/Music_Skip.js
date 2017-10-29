@@ -11,7 +11,11 @@ module.exports = {
         }
 
         try{
-            playlist.skip(serverid);
+            if(playlist.skip(serverid)){
+                genericfunctions.sendErrorMessage(command, "Skipped a song.");
+            }else{
+                genericfunctions.sendErrorMessage(command, "There are no songs to skip.");
+            }
             return;
         }catch(err){
             genericfunctions.sendErrorMessage(command, err.message);
