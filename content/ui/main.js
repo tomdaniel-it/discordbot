@@ -29,13 +29,13 @@ bot.on('message', message=>{ //MESSAGE SENT
     var command = new Command(message, prefix);
     result = command.createParameters();
     if(result!==true){
-        message.channel.send(result);
+        genericfunctions.sendErrorMessage(command, result);
         return;
     }
 
     result = isValidInput(command.getCommand(), command.getParameters());
     if(result!==true){
-        require('../domain/GenericFunctions.js').sendErrorMessage(command, result);
+        genericfunctions.sendErrorMessage(command, result);
         return;
     }
 
