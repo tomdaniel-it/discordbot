@@ -1,9 +1,11 @@
 var genericfunctions = require('../GenericFunctions.js');
+var playlist = require('../Playlist.js');
 
 module.exports = {
     execute: function(command){
         var message = command.getMessage();
-        if (!message.guild){
+        var serverid = command.getMessage().guild.id;
+        if (!message.guild || serverid===undefined || serverid===null || serverid.length===0){
             genericfunctions.sendErrorMessage(command, "You must be in a voice channel to use that command.");
             return;
         }
@@ -42,6 +44,13 @@ module.exports = {
                     return;
             }
         }
+
+        //CHECK IF MUSICBOT IS PLAYING, IF SO, CANCEL
+        if(playlist.isPlaying(serverid)){
+            genericfunctions.sendErrorMessage(command, "You can't use this command whilst I am playing music.");
+            return;
+        }
+
         if (message.member.voiceChannel) {
             message.member.voiceChannel.join()
             .then(connection => { // Connection is an instance of VoiceConnection
