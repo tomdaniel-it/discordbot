@@ -5,8 +5,11 @@ A discord bot with some cool commands.
 node launcher.js
 
 # Required
-node packages (npm install <name>):
+node packages (npm install {name}):
   - discord.js
   - googleapis
   - google-tts-api
   - ytdl-core
+  
+# Commands
+All commands can be found in: [content/storage/commands.js](content/storage/commands.js)
