@@ -61,7 +61,7 @@ bot.on("guildCreate", (guild) => {
     message_channel.send("Hello, I'm ISWBot. Type '" + require('../../settings.js').command_prefix + "help' to get started. :)");
 });
 
-bot.login('MzY4NDY1NDMwOTI0MjMwNjcw.DMKX1g.k8vIj-8ZNrSOktBIx4e9ks8UFAQ');
+bot.login(require("../../keys.js").discord_bot_token);
 
 function isValidInput(command, parameters){
 

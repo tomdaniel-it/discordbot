@@ -1,3 +1,4 @@
 module.exports = {
+    discord_bot_token: "",
     youtube_api_key: "",
 };
