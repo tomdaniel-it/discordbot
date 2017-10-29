@@ -95,7 +95,7 @@ module.exports = [
     },
     {
         command:"music_pick",
-        description:"Picks a song from the search results from the command 'music_add -find title'.",
+        description:"Picks a song from the search results from the command 'music_add -search title'.",
         required_params:[
             {key:"num",description:"The number of the song to add from the search results."},
         ],
