@@ -6,3 +6,6 @@ content/storage/memes/*.jpeg
 content/storage/memes/*.bmp
 content/storage/memes/*.svg
 keys.js
+node_modules/*
+package.json
+package-lock.json
