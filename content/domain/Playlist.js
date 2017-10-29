@@ -1,5 +1,5 @@
 var emitter = require('events').EventEmitter;
-var queues = []; //[{connection: Connection, serverid:String, emitter: EventEmitter, playing:boolean, currentlyPlaying: {url:String, type:String, title:String, duration:String}, playlist:[{url:String, type:String, title:String, duration:String}] }]
+var queues = []; //[{connection: Connection, dispatcher: StreamDispatcher, serverid:String, emitter: EventEmitter, playing:boolean, currentlyPlaying: {url:String, type:String, title:String, duration:String}, playlist:[{url:String, type:String, title:String, duration:String}] }]
 var musicplayer = require('../domain/MusicPlayer.js');
 
 function getQueue(serverid){
@@ -20,6 +20,7 @@ function getQueue(serverid){
 function createQueue(serverid){
     var queue = {
         connection: null,
+        dispatcher: null,
         serverid: serverid,
         emitter: null,
         playing: false,
@@ -99,6 +100,9 @@ function playSong(serverid, connection, song){
     var queue = getQueue(serverid);
     queue.playing = true;
     queue.emitter.emit('newsong', song);
+    if(queue.dispatcher !== undefined && queue.dispatcher !== null){
+        queue.dispatcher.removeAllListeners();
+    }
     var dispatcher = musicplayer.play(connection, song.url, song.type);
     dispatcher.on('end', val=>{
         if(!queue.playing) return;
@@ -112,6 +116,7 @@ function playSong(serverid, connection, song){
             playSong(serverid, connection, nextsong);
         }, 500);
     });
+    queue.dispatcher = dispatcher;
 }
 
 module.exports = {
@@ -126,6 +131,10 @@ module.exports = {
         serverid = serverid.toString();
         var connection = getConnection(serverid);
         var song = getNextSong(getQueue(serverid));
+        if(song===null){
+            module.exports.stop(serverid);
+            return;
+        }
         playSong(serverid, connection, song);
         return;
     }, 
