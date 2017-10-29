@@ -45,9 +45,21 @@ bot.on('message', message=>{ //MESSAGE SENT
     
 });
 
-bot.on('guildMemberAdd', member=>{ //USER JOINS SERVER
-
-})
+bot.on("guildCreate", (guild) => {
+    var channels = guild.channels.array();
+    var message_channel = null;
+    for(var i=0;i<channels.length;i++){
+        if(channels[i].name.toLowerCase() === "general" && channels[i].type === "text"){
+            message_channel = channels[i];
+        }
+        if(channels[i].name.toLowerCase().indexOf("bot") !== -1 && channels[i].type === "text"){
+            message_channel = channels[i];
+            break;
+        }
+    }
+    if(message_channel===null) return;
+    message_channel.send("Hello, I'm ISWBot. Type '" + require('../../settings.js').command_prefix + "help' to get started. :)");
+});
 
 bot.login('MzY4NDY1NDMwOTI0MjMwNjcw.DMKX1g.k8vIj-8ZNrSOktBIx4e9ks8UFAQ');
 
