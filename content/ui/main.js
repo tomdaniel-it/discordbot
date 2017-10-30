@@ -7,6 +7,7 @@ const bot = new Discord.Client();
 var prefix = require('../../settings.js').command_prefix;
 var genericfunctions = require("../domain/GenericFunctions.js");
 var rolemanager = require('../domain/RoleManager.js');
+var cooldownmanager = require('../domain/CooldownManager.js');
 var result;
 
 var events = require('events'),
@@ -38,6 +39,35 @@ bot.on('message', message=>{ //MESSAGE SENT
     if(result!==true){
         genericfunctions.sendErrorMessage(command, result);
         return;
+    }
+
+    if(command.getMessage().guild !== null){
+        result = hasPermissionsForCommand(command.getMessage().guild.id, command.getCommand(), command.getMessage().author.id);
+        if(!result){
+            genericfunctions.sendErrorMessage(command, "You do not have permissions to use this command.");
+            return;
+        }
+
+        result = isOnCooldown(command.getMessage().guild.id, command.getCommand(), command.getMessage().author.id);
+        if(result){
+            var cooldown = cooldownmanager.getCooldownTimeOfCommand(command.getCommand()); //IN SECONDS
+            var newcooldown = cooldown;
+            var cooldown_unit = "second";
+            if(cooldown > 60){
+                cooldown_unit = "minute";
+                newcooldown = Math.floor(cooldown / 60); //IN MINS
+                newcooldown += ( (100/60 * (cooldown % 60) ) /100 );
+            }
+            if(newcooldown > 60){
+                cooldown_unit = "hour";
+                newcooldown = Math.floor(cooldown / 3600); //IN HOURS
+                newcooldown += ( (100/3600 * (cooldown % 3600) ) /100 );
+            }
+            genericfunctions.sendErrorMessage(command, "This command has a " + newcooldown + " " + cooldown_unit + " cooldown time.");
+            return;
+        }else{
+            cooldownmanager.addCommand(command.getMessage().guild.id, command.getMessage().author.id, command.getCommand());
+        }
     }
 
     //HANDLE COMMAND
@@ -138,4 +168,22 @@ function isValidInput(command, parameters){
     if(unknown_param_found) return "Unknown parameter used for '" + prefix + command + "'. Use '" + prefix + "help -c command' for more information.";
 
     return true;
+}
+
+function hasPermissionsForCommand(serverid, command, userid){
+    serverid = serverid.toString();
+    var required_role = null;
+    for(var i=0;i<commandlist.length;i++){
+        if(commandlist[i].command === command.toLowerCase()){
+            required_role = commandlist[i].required_role;
+            break;
+        }
+    }
+    if(required_role === null) return true;
+    return rolemanager.isAdmin(serverid, userid);
+}
+
+function isOnCooldown(serverid, command, author_id){
+    serverid = serverid.toString();
+    return cooldownmanager.isOnCooldown(serverid, author_id, command);
 }

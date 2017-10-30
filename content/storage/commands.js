@@ -1,3 +1,21 @@
+/*
+ * EXAMPLE: .something -option1 value1 -option2 value2 (-option3 value3)
+ * {
+ *      command: "something",
+ *      description: "Description of command",
+ *      required_params: [
+ *          {key:"option1",description:"This is option 1"},
+ *          {key:"option2",description:"This is option 2"}
+ *      ],
+ *      optional_params: [
+ *          {key:"option3",description:"This is option 3, this one is optional"},
+ *      ],
+ *      disabled: false, //IF true => COMMAND CAN'T BE USED BY ANYONE
+ *      required_role: null, //NULL => EVERYONE CAN USE IT, STRING => EVERYONE WITH THAT ROLE CAN USE IT (Example: "admin")
+ *      cooldown_time: null //NULL OR 0 => NO COOLDOWN, EX: 300 (IN SECONDS) => 5 MINUTE COOLDOWN PER USER
+ * }
+*/
+
 module.exports = [
     {
         command:"ping",
@@ -5,6 +23,8 @@ module.exports = [
         required_params:[],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"help",
@@ -14,6 +34,8 @@ module.exports = [
             {key:"c",description:"The command to retrieve help about."}
         ],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"insult",
@@ -23,6 +45,8 @@ module.exports = [
             {key:"p",description:"The person to direct the insult to (Works with @person)."}
         ],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"meme",
@@ -30,6 +54,8 @@ module.exports = [
         required_params:[],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"fancy",
@@ -40,6 +66,8 @@ module.exports = [
         ],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"purge",
@@ -50,6 +78,8 @@ module.exports = [
             {key:"user", description:"Choose a specific person to delete messages from."}
         ],
         disabled: false,
+        required_role: "admin",
+        cooldown_time: null,
     },
     {
         command:"say",
@@ -60,6 +90,8 @@ module.exports = [
         optional_params:[
             {key:"lang",description:"The language to say the message in. Choices: english, french, dutch, german, korean, russian, italian, spanish."},],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"coinflip",
@@ -67,6 +99,8 @@ module.exports = [
         required_params:[],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"music_play",
@@ -74,6 +108,8 @@ module.exports = [
         required_params:[],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"music_stop",
@@ -81,6 +117,8 @@ module.exports = [
         required_params:[],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"music_add",
@@ -92,6 +130,8 @@ module.exports = [
             {key:"position",description:"The position to place the song at in the playlist (1 = top)."},
         ],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"music_pick",
@@ -101,6 +141,8 @@ module.exports = [
         ],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"music_skip",
@@ -108,6 +150,8 @@ module.exports = [
         required_params:[],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"music_purge",
@@ -117,6 +161,8 @@ module.exports = [
             {key:"amount",description:"The amount of songs to delete starting from top (DEFAULT ALL SONGS)."},
         ],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
     {
         command:"music_list",
@@ -124,6 +170,8 @@ module.exports = [
         required_params:[],
         optional_params:[],
         disabled: false,
+        required_role: null,
+        cooldown_time: null,
     },
 
 
