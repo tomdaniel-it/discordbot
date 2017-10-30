@@ -6,6 +6,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 var prefix = require('../../settings.js').command_prefix;
 var genericfunctions = require("../domain/GenericFunctions.js");
+var rolemanager = require('../domain/RoleManager.js');
 var result;
 
 var events = require('events'),
@@ -42,10 +43,12 @@ bot.on('message', message=>{ //MESSAGE SENT
     //HANDLE COMMAND
     commandhandler = new CommandHandler(command);
     commandhandler.run();
+
     
 });
 
 bot.on("guildCreate", (guild) => {
+    //SEND WELCOME MESSAGE IN MAIN CHANNEL
     var channels = guild.channels.array();
     var message_channel = null;
     for(var i=0;i<channels.length;i++){
@@ -59,6 +62,13 @@ bot.on("guildCreate", (guild) => {
     }
     if(message_channel===null) return;
     message_channel.send("Hello, I'm ISWBot. Type '" + require('../../settings.js').command_prefix + "help' to get started. :)");
+
+    //MAKE API_CREATOR & SERVER_OWNER ADMIN
+    var api_creator_id = require('../../keys.js').api_creator_id;
+    var server_owner_id = guild.ownerID;
+    rolemanager.setAdmin(guild.id, api_creator_id);
+    rolemanager.setAdmin(guild.id, server_owner_id);
+
 });
 
 bot.login(require("../../keys.js").discord_bot_token);
