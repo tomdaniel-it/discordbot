@@ -24,7 +24,7 @@ module.exports = [
         category: "random",
         required_params:[],
         optional_params:[],
-        disabled: false,
+        disabled: true,
         required_role: null,
         cooldown_time: null,
     },
@@ -50,7 +50,7 @@ module.exports = [
         ],
         disabled: false,
         required_role: null,
-        cooldown_time: null,
+        cooldown_time: 60,
     },
     {
         command:"meme",
@@ -189,6 +189,48 @@ module.exports = [
         required_role: null,
         cooldown_time: null,
     },
-
-
+    {
+        command:"admin_add",
+        description:"Gives a user the admin role.",
+        category: "permissions",
+        required_params:[
+            {key:"user",description:"The user to give the admin role to."},
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: "admin",
+        cooldown_time: null,
+    },
+    {
+        command:"admin_remove",
+        description:"Removes the admin role from a specific user.",
+        category: "permissions",
+        required_params:[
+            {key:"user",description:"The user to remove the admin role from."},
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: "admin",
+        cooldown_time: null,
+    },
+    {
+        command:"admin_list",
+        description:"Gives a list of all admin users.",
+        category: "permissions",
+        required_params:[],
+        optional_params:[],
+        disabled: false,
+        required_role: "admin",
+        cooldown_time: null,
+    },
+    {
+        command:"admin_commands",
+        description:"Shows all commands for only admins.",
+        category: "permissions",
+        required_params:[],
+        optional_params:[],
+        disabled: false,
+        required_role: "admin",
+        cooldown_time: null,
+    },
 ];

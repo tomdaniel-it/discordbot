@@ -1,3 +1,5 @@
+var commandlist = require('../storage/commands.js');
+
 module.exports = {
     sendErrorMessage: function(command, content){
         var timeUntilDeletion = require('../../settings.js').error_message_time_until_deletion; //IN SECONDS
@@ -22,5 +24,11 @@ module.exports = {
     },
     sendMessage: function(command, content){
         return command.getMessage().channel.send(content);
+    },
+    getCategoryOfCommand: function(command){
+        for(var i=0;i<commandlist.length;i++){
+            if(commandlist[i].command === command) return commandlist[i].category;
+        }
+        return null;
     }
 }

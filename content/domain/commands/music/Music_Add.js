@@ -1,6 +1,6 @@
-var genericfunctions = require('../GenericFunctions.js');
-var playlist = require('../Playlist.js');
-var yt_api = require('../YT_api.js');
+var genericfunctions = require('../../GenericFunctions');
+var playlist = require('../../Playlist.js');
+var yt_api = require('../../YT_api.js');
 var emitter = require('events').EventEmitter;
 var pickerList = []; //[{serverid: String, emitter: EventEmitter, songs: [{url:String, type:String, title:String, duration:String}], original_message: Message }]
 
@@ -67,7 +67,7 @@ module.exports = {
         }
 
         if((url===null && search===null) || (url!==null && search!==null)){
-            genericfunctions.sendErrorMessage(command, "You must include -url OR -search in the command '" + require('../../../settings.js').command_prefix + "music_add'.");
+            genericfunctions.sendErrorMessage(command, "You must include -url OR -search in the command '" + require('../../../../settings.js').command_prefix + "music_add'.");
             return;
         }
 
@@ -104,7 +104,7 @@ module.exports = {
                 for(var i=0;i<result.length;i++){
                     msg += "\n" + (i+1) + ". " +  result[i].title + " (" + result[i].duration + ")";
                 }
-                msg += "\n\nPick a song using '" + require('../../../settings.js').command_prefix + "music_pick -num [1-x]'.";
+                msg += "\n\nPick a song using '" + require('../../../../settings.js').command_prefix + "music_pick -num [1-x]'.";
                 msg += "\n```";
                 genericfunctions.sendMessage(command, msg).then(original_message=>{
                     genericfunctions.deleteMessage(command.getMessage());

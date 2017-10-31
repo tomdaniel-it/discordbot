@@ -36,7 +36,7 @@ module.exports = {
     getAdmins: function(serverid){
         var roles = getRoles(serverid);
         if(roles === null || roles.admins === undefined || roles.admins === null) return [];
-        return roles.admins;
+        return roles.admins; //[userid: String]
     },
     isAdmin: function(serverid, userid){
         serverid = serverid.toString();

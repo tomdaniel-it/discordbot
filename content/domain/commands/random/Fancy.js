@@ -1,8 +1,8 @@
-var genericfunctions = require('../GenericFunctions.js');
+var genericfunctions = require('../../GenericFunctions.js');
 
 module.exports = {
     execute: function(command){
-        var fancylist = require("../../storage/fancylist.js");
+        var fancylist = require("../../../storage/fancylist.js");
         var fonts = fancylist.fonts;
         var decorations = fancylist.decorations;
         

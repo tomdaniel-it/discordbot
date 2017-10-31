@@ -1,5 +1,5 @@
-var playlist = require('../Playlist.js');
-var genericfunctions = require('../GenericFunctions.js');
+var playlist = require('../../Playlist.js');
+var genericfunctions = require('../../GenericFunctions.js');
 
 module.exports = {
     execute: function(command){

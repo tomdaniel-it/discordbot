@@ -1,5 +1,5 @@
-var genericfunctions = require('../GenericFunctions.js');
-var rolemanager = require('../RoleManager.js');
+var genericfunctions = require('../../GenericFunctions.js');
+var rolemanager = require('../../RoleManager.js');
 
 module.exports = {
     execute: function(command){
@@ -14,7 +14,7 @@ module.exports = {
             var author = command.getMessage().author;
             var content = "----------------------------------------------------------\n";
             content += "Help has arrived. Here is a list of all possible commands:\n";
-            var commandlist = JSON.parse(JSON.stringify(require("../../storage/commands.js")));
+            var commandlist = JSON.parse(JSON.stringify(require("../../../storage/commands.js")));
             var categories = [];
             for(var i=0;i<commandlist.length;i++){
                 if(commandlist[i].category !== undefined && commandlist[i].category !== null && categories.indexOf(commandlist[i].category)===-1) categories.push(commandlist[i].category);
@@ -55,7 +55,7 @@ module.exports = {
             if(com.substring(0,1)===".")com=com.substring(1);
             var content = "----------------------------------------------------------\n";
             content += "Help has arrived for the command " + command.getPrefix() + com + ":";
-            var commandlist = require("../../storage/commands.js");
+            var commandlist = require("../../../storage/commands.js");
             for(var i=0;i<commandlist.length;i++){
                 if(commandlist[i].command===com){
                     commandlist = commandlist[i];

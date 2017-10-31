@@ -1,4 +1,4 @@
-var genericfunctions = require('../GenericFunctions.js');
+var genericfunctions = require('../../GenericFunctions.js');
 
 module.exports = {
     execute: function(command){
@@ -10,9 +10,9 @@ module.exports = {
             return;
         }
 
-        var item = require('../commands/Music_Add.js').getPickerListItem(serverid);
+        var item = require('../music/Music_Add.js').getPickerListItem(serverid);
         if(item === null){
-            genericfunctions.sendErrorMessage(command, "First do '" + require('../../../settings.js').command_prefix + "music_add -search Title' to get options to pick one out of.");
+            genericfunctions.sendErrorMessage(command, "First do '" + require('../../../../settings.js').command_prefix + "music_add -search Title' to get options to pick one out of.");
             return;
         }
 

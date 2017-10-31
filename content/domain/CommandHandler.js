@@ -1,10 +1,13 @@
+var genericfunctions = require('../domain/GenericFunctions.js');
+
 module.exports = class CommandHandler{
     constructor(command){
         this.command = command;
     }
 
     run(){
-        var command_dir = "../domain/commands/";
+        var category = genericfunctions.getCategoryOfCommand(this.command.getCommand());
+        var command_dir = "../domain/commands/" + category.trim().toLowerCase() + "/";
         switch(this.command.getCommand()){
             case "ping":
                 require(command_dir + 'Ping.js').execute(this.command);
@@ -50,6 +53,18 @@ module.exports = class CommandHandler{
                 break;
             case "music_list":
                 require(command_dir + 'Music_List.js').execute(this.command);
+                break;
+            case "admin_add":
+                require(command_dir + 'Admin_Add.js').execute(this.command);
+                break;
+            case "admin_remove":
+                require(command_dir + 'Admin_Remove.js').execute(this.command);
+                break;
+            case "admin_list":
+                require(command_dir + 'Admin_List.js').execute(this.command);
+                break;
+            case "admin_commands":
+                require(command_dir + 'Admin_Commands.js').execute(this.command);
                 break;
             default:
                 return;
