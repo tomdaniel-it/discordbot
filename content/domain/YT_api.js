@@ -29,16 +29,25 @@ function getJSON(options, onResult)
 };
 
 function isoToString(iso){
-    var regex = /((\d+)H)?(\d+)M(\d+)S/;
+    var regex = /((\d+)H)?((\d+)M)?(\d+)S/;
     if(!regex.test(iso)){
         return "Time undefined";
     }
     var result = "";
     var match = regex.exec(iso);
     if(match[2]!==undefined && match[2]!==null && match[2]!==''){
+        if(match[2].length === 1) result += "0";
         result += match[2] + ":";
     }
-    result += match[3] + ":" + match[4];
+    if(match[4]!==undefined && match[4]!==null && match[4]!==''){
+        if(match[4].length === 1) result += "0";
+        result += match[4];
+    }else{
+        result += "00";
+    }
+    result += ":";
+    if(match[5].length === 1) result += "0";
+    result += match[5];
     return result;
 }
 
