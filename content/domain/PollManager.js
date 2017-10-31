@@ -35,6 +35,7 @@ function createPollObject(name, options){ //name: String, options: [name: String
     var newpoll = JSON.parse(JSON.stringify(polltemplate));
     newpoll.name = name;
     for(var i=0;i<options.length;i++){
+        if(options[i].trim() === "") continue;
         newpoll.options.push(  {name: options[i], votes: []}  );
     }
     return newpoll;
