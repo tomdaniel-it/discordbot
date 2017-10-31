@@ -23,6 +23,11 @@ bot.on('ready', ()=>{ //BOT LAUNCHED
     bot.user.setGame("'.help' for info") //Will display 'Playing xxx' under bot name
 });
 
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    // application specific logging, throwing an error, or other logic here
+  });
+
 bot.on('message', message=>{ //MESSAGE SENT
     if(message.author.id === '368465430924230670') return;
     if(message.system) return;
@@ -73,7 +78,7 @@ bot.on('message', message=>{ //MESSAGE SENT
     //HANDLE COMMAND
     commandhandler = new CommandHandler(command);
     commandhandler.run();
-
+    
     
 });
 
