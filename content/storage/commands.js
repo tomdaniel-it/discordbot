@@ -34,7 +34,7 @@ module.exports = [
         category: "random",
         required_params:[],
         optional_params:[
-            {key:"c",description:"The command to retrieve help about."}
+            {key:"command",description:"The command to retrieve help about."}
         ],
         disabled: false,
         required_role: null,
@@ -46,7 +46,7 @@ module.exports = [
         category: "random",
         required_params:[],
         optional_params:[
-            {key:"p",description:"The person to direct the insult to (Works with @person)."}
+            {key:"user",description:"The user to direct the insult to (Works with @user)."}
         ],
         disabled: false,
         required_role: null,
@@ -77,7 +77,7 @@ module.exports = [
     },
     {
         command:"purge",
-        description:"Deletes messages from current channel (DEFAULT ALL MESSAGES).",
+        description:"Deletes messages from current channel.",
         category: "random",
         required_params:[],
         optional_params:[
@@ -231,6 +231,108 @@ module.exports = [
         optional_params:[],
         disabled: false,
         required_role: "admin",
+        cooldown_time: null,
+    },
+    {
+        command:"poll_create",
+        description:"Creates a poll.",
+        category: "polls",
+        required_params:[
+            {key:"name",description:"The name of the poll."},
+        ],
+        optional_params:[
+            {key:"options",description:"The options for the poll (seperated by ';')."},
+        ],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
+    {
+        command:"poll_close",
+        description:"Closes a poll and shows the most wanted option.",
+        category: "polls",
+        required_params:[
+            {key:"name",description:"The name of the poll."},
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
+    {
+        command:"poll_list",
+        description:"Gives a list of all open polls.",
+        category: "polls",
+        required_params:[],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
+    {
+        command:"poll_remind",
+        description:"Sends a message with the poll information.",
+        category: "polls",
+        required_params:[
+            {key:"name",description:"The name of the poll."},
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
+    {
+        command:"poll_vote",
+        description:"Vote on an option from a poll.",
+        category: "polls",
+        required_params:[
+            {key:"name",description:"The name of the poll."},
+            {key:"option",description:"The number of the option."},
+        
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
+    {
+        command:"poll_unvote",
+        description:"Remove your vote from an option from a poll.",
+        category: "polls",
+        required_params:[
+            {key:"name",description:"The name of the poll."},
+            {key:"option",description:"The number of the option."},
+        
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
+    {
+        command:"poll_add_option",
+        description:"Adds an option to a poll.",
+        category: "polls",
+        required_params:[
+            {key:"name",description:"The name of the poll."},
+            {key:"option",description:"The number of the option."},
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
+    {
+        command:"poll_remove_option",
+        description:"Removes an option from a poll.",
+        category: "polls",
+        required_params:[
+            {key:"name",description:"The name of the poll."},
+            {key:"option",description:"The number of the option."},
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
         cooldown_time: null,
     },
 ];
