@@ -30,5 +30,16 @@ module.exports = {
             if(commandlist[i].command === command) return commandlist[i].category;
         }
         return null;
+    },
+    pollToString: function(poll){
+        var content = "Poll: " + poll.name + "\n```";
+        for(var i=0;i<poll.options.length;i++){
+            var option = poll.options[i];
+            content += "\n" + (i+1) + ". " +option.name;
+            var votecount = ( (option.votes === undefined || option.votes === null ) ? 0 : option.votes.length );
+            content += " (" + votecount + " votes)";
+        }
+        content += "\n```"
+        return content;
     }
 }
