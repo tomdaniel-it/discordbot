@@ -22,6 +22,11 @@ function createPollObject(name, options){ //name: String, options: [name: String
         throw new Error("No name specified for the poll.");
         return;
     }
+    name = name.trim();
+    if(name.split(" ").length > 1){
+        throw new Error("Make sure the name is only one word. That makes voting easier.");
+        return;
+    }
     if(options === undefined || options === null) options = [];
     for(var i=0;i<options.length;i++){
         for(var j=0;j<options.length;j++){
