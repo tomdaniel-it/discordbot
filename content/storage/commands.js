@@ -24,7 +24,7 @@ module.exports = [
         category: "random",
         required_params:[],
         optional_params:[],
-        disabled: true,
+        disabled: false,
         required_role: null,
         cooldown_time: null,
     },
