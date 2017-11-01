@@ -1,9 +1,10 @@
-var polls = {}; //{serverid: [ {name: String, options: [ {name: String, votes: [ userid: String ] } ] } ] }
+var polls = {}; //{serverid: [ {name: String, author: String, options: [ {name: String, votes: [ userid: String ] } ] } ] }
 /* 
  * {
  *  serverid: [ 
  *      {
  *          name: String, //Name of poll
+ *          author: Stirng //Name of user author
  *          options: [ //Options of poll
  *              {
  *                  name: String, //Name of option
@@ -15,9 +16,9 @@ var polls = {}; //{serverid: [ {name: String, options: [ {name: String, votes: [
  * }
 */ 
 
-var polltemplate = {name: "", options: []};
+var polltemplate = {name: "", author: "", options: []};
 
-function createPollObject(name, options){ //name: String, options: [name: String]
+function createPollObject(name, author, options){ //name: String, author: String, options: [name: String]
     if(name===null || name.trim().length === 0){
         throw new Error("No name specified for the poll.");
         return;
@@ -39,6 +40,7 @@ function createPollObject(name, options){ //name: String, options: [name: String
     }
     var newpoll = JSON.parse(JSON.stringify(polltemplate));
     newpoll.name = name;
+    newpoll.author = author;
     for(var i=0;i<options.length;i++){
         if(options[i].trim() === "") continue;
         newpoll.options.push(  {name: options[i], votes: []}  );
@@ -77,10 +79,10 @@ function getServer(serverid){
 }
 
 module.exports = {
-    create: function(serverid, name, options){ //name: String, options: [option: String]
+    create: function(serverid, name, author, options){ //name: String, options: [option: String]
         serverid = serverid.toString();
 
-        var pollobj = createPollObject(name, options);
+        var pollobj = createPollObject(name, author, options);
         addPoll(serverid, pollobj);
         return;
     },

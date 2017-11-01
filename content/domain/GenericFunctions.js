@@ -32,7 +32,7 @@ module.exports = {
         return null;
     },
     pollToString: function(poll){
-        var content = "Poll: " + poll.name + "\n```";
+        var content = "Poll: " + poll.name + "   Creator: " + poll.author + "\n```";
         for(var i=0;i<poll.options.length;i++){
             var option = poll.options[i];
             content += "\n" + (i+1) + ". " +option.name;
