@@ -315,7 +315,7 @@ module.exports = [
         category: "polls",
         required_params:[
             {key:"name",description:"The name of the poll."},
-            {key:"option",description:"The number of the option."},
+            {key:"option",description:"The name of the option."},
         ],
         optional_params:[],
         disabled: false,
