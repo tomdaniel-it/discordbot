@@ -1,10 +1,11 @@
-var polls = {}; //{serverid: [ {name: String, author: String, options: [ {name: String, votes: [ userid: String ] } ] } ] }
+var polls = {}; //{serverid: [ {name: String, author: String, last_message: Message, options: [ {name: String, votes: [ userid: String ] } ] } ] }
 /* 
  * {
  *  serverid: [ 
  *      {
  *          name: String, //Name of poll
- *          author: Stirng //Name of user author
+ *          author: String, //Name of user author
+ *          last_message: Message //The last message sent to chat by the bot about the poll, should be deleted before sending a new one => against spam
  *          options: [ //Options of poll
  *              {
  *                  name: String, //Name of option
@@ -16,7 +17,7 @@ var polls = {}; //{serverid: [ {name: String, author: String, options: [ {name: 
  * }
 */ 
 
-var polltemplate = {name: "", author: "", options: []};
+var polltemplate = {name: "", author: "", last_message: null, options: []};
 
 function createPollObject(name, author, options){ //name: String, author: String, options: [name: String]
     if(name===null || name.trim().length === 0){
@@ -202,5 +203,14 @@ module.exports = {
     getList: function(serverid){
         if(polls[serverid] === undefined || polls[serverid] === null) return [];
         return polls[serverid];
+    },
+    getLastMessage: function(serverid, name){
+        var poll = getPoll(serverid, name);
+        return poll.last_message;
+    },
+    setLastMessage: function(serverid, name, message){
+        var poll = getPoll(serverid, name);
+        poll.last_message = message;
+        return;
     }
 };
