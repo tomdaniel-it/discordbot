@@ -39,7 +39,14 @@ module.exports = {
             var votecount = ( (option.votes === undefined || option.votes === null ) ? 0 : option.votes.length );
             content += " (" + votecount + " votes)";
         }
-        content += "\n```"
+        if(poll.options.length === 0){
+            content += "There are no options yet.";
+            content += "\nUse '" + require('../../settings.js').command_prefix + "poll_add_option -name " + poll.name + " -option optionName' to add an option.";
+            content += "\n```";
+            return content;
+        }
+        content += "\n\nUse '" + require('../../settings.js').command_prefix + "poll_vote -name " + poll.name + " -option optionNumber' to vote.";
+        content += "\n```";
         return content;
     }
 }
