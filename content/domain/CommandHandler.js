@@ -66,6 +66,30 @@ module.exports = class CommandHandler{
             case "admin_commands":
                 require(command_dir + 'Admin_Commands.js').execute(this.command);
                 break;
+            case "poll_create":
+                require(command_dir + 'Poll_Create.js').execute(this.command);
+                break;
+            case "poll_close":
+                require(command_dir + 'Poll_Close.js').execute(this.command);
+                break;
+            case "poll_list":
+                require(command_dir + 'Poll_List.js').execute(this.command);
+                break;
+            case "poll_remind":
+                require(command_dir + 'Poll_Remind.js').execute(this.command);
+                break;
+            case "poll_vote":
+                require(command_dir + 'Poll_Vote.js').execute(this.command);
+                break;
+            case "poll_unvote":
+                require(command_dir + 'Poll_Unvote.js').execute(this.command);
+                break;
+            case "poll_add_option":
+                require(command_dir + 'Poll_Add_Option.js').execute(this.command);
+                break;
+            case "poll_remove_option":
+                require(command_dir + 'Poll_Remove_Option.js').execute(this.command);
+                break;
             default:
                 return;
         }
