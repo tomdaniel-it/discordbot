@@ -61,6 +61,11 @@ module.exports = {
                     pollmanager.setLastMessage(serverid, name, message);
                 });
 
+            }).catch(err=>{ //MESSAGE WAS DELETED BY OTHER PARTY
+                module.exports.sendMessage(command, module.exports.pollToString(poll)).then(message=>{
+                    module.exports.deleteMessage(command.getMessage());
+                    pollmanager.setLastMessage(serverid, name, message);
+                });
             });
         }else{
             module.exports.sendMessage(command, module.exports.pollToString(poll)).then(message=>{
