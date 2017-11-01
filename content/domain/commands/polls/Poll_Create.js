@@ -39,17 +39,6 @@ module.exports = {
             return;
         }
 
-        var poll = pollmanager.get(serverid, name);
-        var last_message = poll.last_message;
-        if(last_message !== undefined && last_message !== null){
-            last_message.delete().then(message=>{
-                genericfunctions.sendMessage(command, genericfunctions.pollToString(poll));
-                genericfunctions.deleteMessage(command.getMessage());
-            });
-        }else{
-            genericfunctions.sendMessage(command, genericfunctions.pollToString(poll));
-            genericfunctions.deleteMessage(command.getMessage());
-        }
-        return;
+        genericfunctions.pollSendMessage(serverid, name, command);
     }
 };

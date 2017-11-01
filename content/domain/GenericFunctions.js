@@ -1,4 +1,5 @@
 var commandlist = require('../storage/commands.js');
+var pollmanager = require('../domain/PollManager.js');
 
 module.exports = {
     sendErrorMessage: function(command, content){
@@ -48,5 +49,25 @@ module.exports = {
         content += "\n\nUse '" + require('../../settings.js').command_prefix + "poll_vote -name " + poll.name + " -option optionNumber' to vote.";
         content += "\n```";
         return content;
+    },
+    pollSendMessage: function(serverid, pollname, command){
+        var name = pollname;
+        var poll = pollmanager.get(serverid, name);
+        var last_message = poll.last_message;
+        if(last_message !== undefined && last_message !== null){
+            last_message.delete().then(message=>{
+                module.exports.sendMessage(command, module.exports.pollToString(poll)).then(message=>{
+                    module.exports.deleteMessage(command.getMessage());
+                    pollmanager.setLastMessage(serverid, name, message);
+                });
+
+            });
+        }else{
+            module.exports.sendMessage(command, module.exports.pollToString(poll)).then(message=>{
+                module.exports.deleteMessage(command.getMessage());
+                pollmanager.setLastMessage(serverid, name, message);
+            });
+        }
+        return;
     }
 }
