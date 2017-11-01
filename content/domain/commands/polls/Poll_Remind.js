@@ -18,6 +18,10 @@ module.exports = {
         }
 
         var name = command.getParameters()[0].value;
+        if(pollmanager.get(serverid, name)===null){
+            genericfunctions.sendErrorMessage(command, "There is no poll with that name.");
+            return;
+        }
         genericfunctions.pollSendMessage(serverid, name, command);
     }
 };
