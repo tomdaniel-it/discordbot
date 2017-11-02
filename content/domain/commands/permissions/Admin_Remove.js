@@ -29,8 +29,7 @@ module.exports = {
                 }
             }
             if(userids.length === 0){
-                command.getMessage().author.send("No user was found by that name, try using an @Mention.");
-                genericfunctions.deleteMessage(command.getMessage());
+                genericfunctions.sendPM(command, command.getMessage().author.id, "No user was found by that name, try using an @Mention.", true);
                 return;
             }
         }
@@ -39,8 +38,7 @@ module.exports = {
             rolemanager.unsetAdmin(serverid, userids[i]);
         }
         
-        command.getMessage().author.send("The admin role has been removed from that user.");
-        genericfunctions.deleteMessage(command.getMessage());
+        genericfunctions.sendPM(command, command.getMessage().author.id, "The admin role has been removed from that user", true);
         return;
     }
 };

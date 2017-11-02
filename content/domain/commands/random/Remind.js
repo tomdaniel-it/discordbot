@@ -64,15 +64,7 @@ module.exports = {
         
         var content = "---------------------------------";
         content += "\nReminder" + (anonymous?(""):(" by " + author)) + ": " + message;
-        var members = guild.members.array();
-        for(var i=0;i<members.length;i++){
-            if(members[i].user.id.toString() === userid.toString()){
-                members[i].user.send(content);
-                genericfunctions.deleteMessage(command.getMessage());
-                return;
-            }
-        }
-        genericfunctions.sendErrorMessage(command, "No user was found with this username.");
+        genericfunctions.sendPM(command, userid, content, true);
         return;
     }
 };

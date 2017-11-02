@@ -26,6 +26,29 @@ module.exports = {
     sendMessage: function(command, content){
         return command.getMessage().channel.send(content);
     },
+    sendPM: function(command, userid, content, deleteOriginal){
+        var guild = command.getMessage().guild;
+        if(guild === undefined || guild === null){
+            module.exports.sendErrorMessage(command, "This command is only available in a discord server.");
+            return;
+        }
+        var members = guild.members.array();
+        var user = null;
+        for(var i=0;i<members.length;i++){
+            if(members[i].user.id.toString() === userid.toString()){
+                member = members[i].user;
+                break;
+            }
+        }
+        if(user === null){
+            module.exports.sendErrorMessage(command, "No user was found with this username.");
+            return;
+        }
+        user.send(content);
+        if(deleteOriginal){
+            module.exports.deleteMessage(command.getMessage());
+        }
+    },
     getCategoryOfCommand: function(command){
         for(var i=0;i<commandlist.length;i++){
             if(commandlist[i].command === command) return commandlist[i].category;

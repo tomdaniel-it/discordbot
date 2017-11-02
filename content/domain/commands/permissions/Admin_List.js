@@ -33,8 +33,7 @@ module.exports = {
         }
         content += "\n```";
 
-        command.getMessage().author.send(content);
-        genericfunctions.deleteMessage(command.getMessage());
+        genericfunctions.sendPM(command, command.getMessage().author.id, content, true);
         return;
         
     }

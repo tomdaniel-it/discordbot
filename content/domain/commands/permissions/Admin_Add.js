@@ -39,8 +39,7 @@ module.exports = {
             rolemanager.setAdmin(serverid, userids[i]);
         }
 
-        command.getMessage().author.send("That user has been given the role admin.");
-        genericfunctions.deleteMessage(command.getMessage());
+        genericfunctions.sendPM(command, command.getMessage().author.id, "That user has been given the role admin.", true);
         return;
     }
 };
