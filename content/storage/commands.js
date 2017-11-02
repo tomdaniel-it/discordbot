@@ -335,4 +335,19 @@ module.exports = [
         required_role: null,
         cooldown_time: null,
     },
+    {
+        command:"remind",
+        description:"Reminds a user of something he has to do.",
+        category: "random",
+        required_params:[
+            {key:"user",description:"The user to remind."},
+            {key:"message",description:"The message."},
+        ],
+        optional_params:[
+            {key:"anonymous",description:"true or false(default), true => senders name will not be shown in reminder."},
+        ],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
 ];

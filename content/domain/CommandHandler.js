@@ -90,6 +90,9 @@ module.exports = class CommandHandler{
             case "poll_remove_option":
                 require(command_dir + 'Poll_Remove_Option.js').execute(this.command);
                 break;
+            case "remind":
+                require(command_dir + 'remind.js').execute(this.command);
+                break;
             default:
                 return;
         }
