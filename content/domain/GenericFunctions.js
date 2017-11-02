@@ -36,7 +36,7 @@ module.exports = {
         var user = null;
         for(var i=0;i<members.length;i++){
             if(members[i].user.id.toString() === userid.toString()){
-                member = members[i].user;
+                user = members[i].user;
                 break;
             }
         }
