@@ -41,27 +41,8 @@ module.exports = {
             }
         }
 
-        var regex = /^<@(\d+)>$/;
-        var userid = null;
-        if(regex.test(user)){
-            //USER IS WITH @MENTION
-            var match = regex.exec(user);
-            userid = match[1];
-        }else{
-            //USER IS NORMAL TEXT
-            var members = guild.members.array();
-            for(var i=0;i<members.length;i++){
-                if(members[i].user.username.trim().toLowerCase() === user.trim().toLowerCase()){
-                    userid = members[i].user.id;
-                    break;
-                }
-            }
-            if(userid === null){
-                genericfunctions.sendErrorMessage(command, "No user was found with this username.");
-                return;
-            }
-        }
-        
+        var userid = genericfunctions.getUserId(command, guild, user);
+        if(userid === undefined || userid === null) return;
         var content = "---------------------------------";
         content += "\nReminder" + (anonymous?(""):(" by " + author)) + ": " + message;
         genericfunctions.sendPM(command, userid, content, true);

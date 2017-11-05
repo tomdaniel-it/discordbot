@@ -15,7 +15,7 @@ module.exports = {
         }
 
         var param = command.getParameters()[0].value;
-        var regex = /^<@(\d+)>$/;
+        var regex = /^<@!?(\d+)>$/;
         var userids = [];
 
         if(regex.test(param)){ //PARAM IS A @USER MENTION

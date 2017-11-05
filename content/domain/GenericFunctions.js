@@ -97,5 +97,37 @@ module.exports = {
             });
         }
         return;
+    },
+    getUserId: function(command, guild, user_mention_or_name){
+        if(guild === undefined || guild === null || guild.members === undefined ||guild.members === null){
+            module.exports.sendErrorMessage(command, "This command is only available in a discord server.");
+            return;
+        }
+        var regex = /^<@!?(\d+)>$/;
+        var userid = null;
+        if(regex.test(user_mention_or_name)){
+            //USER IS WITH @MENTION
+            var match = regex.exec(user_mention_or_name);
+            userid = match[1];
+        }else{
+            //USER IS NORMAL TEXT
+            var members = guild.members.array();
+            for(var i=0;i<members.length;i++){
+                var withoutApo = (user_mention_or_name.substring(0,1) === "@"?user_mention_or_name.substring(1):user_mention_or_name);
+                if(members[i].user.username.trim().toLowerCase() === user_mention_or_name.trim().toLowerCase() || members[i].user.username.trim().toLowerCase() === withoutApo.trim().toLowerCase()){
+                    userid = members[i].user.id;
+                    break;
+                }
+                if(members[i].nickname !== null && (members[i].nickname.trim().toLowerCase() === user_mention_or_name.trim().toLowerCase() || members[i].nickname.trim().toLowerCase() === withoutApo.trim().toLowerCase() )){
+                    userid = members[i].user.id;
+                    break;
+                }
+            }
+            if(userid === null){
+                module.exports.sendErrorMessage(command, "No user was found with this username.");
+                return;
+            }
+        }
+        return userid;
     }
 }
