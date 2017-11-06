@@ -96,7 +96,7 @@ module.exports = [
             {key:"message",description:"The message to say."},
         ],
         optional_params:[
-            {key:"lang",description:"The language to say the message in. Choices: english, french, dutch, german, korean, russian, italian, spanish."},],
+            {key:"language",description:"The language to say the message in. Choices: english, french, dutch, german, korean, russian, italian, spanish."},],
         disabled: false,
         required_role: null,
         cooldown_time: null,
@@ -135,10 +135,10 @@ module.exports = [
         command:"music_add",
         description:"Add a song to the playlist.",
         category: "music",
-        required_params:[],
+        required_params:[
+            {key:"url|title",description:"Pick a song by a youtube url or title."},
+        ],
         optional_params:[
-            {key:"url",description:"Pick a song by a youtube url."},
-            {key:"search",description:"Pick a song by entering the title."},
             {key:"position",description:"The position to place the song at in the playlist (1 = top)."},
         ],
         disabled: false,
@@ -241,7 +241,7 @@ module.exports = [
             {key:"name",description:"The name of the poll."},
         ],
         optional_params:[
-            {key:"options",description:"The options for the poll (seperated by ';')."},
+            {key:"option1;...",description:"The options for the poll (seperated by ';')."},
         ],
         disabled: false,
         required_role: null,
@@ -287,8 +287,7 @@ module.exports = [
         category: "polls",
         required_params:[
             {key:"name",description:"The name of the poll."},
-            {key:"option",description:"The number of the option."},
-        
+            {key:"option_num",description:"The number of the option."},
         ],
         optional_params:[],
         disabled: false,
@@ -301,8 +300,7 @@ module.exports = [
         category: "polls",
         required_params:[
             {key:"name",description:"The name of the poll."},
-            {key:"option",description:"The number of the option."},
-        
+            {key:"option_num",description:"The number of the option."},
         ],
         optional_params:[],
         disabled: false,
@@ -328,7 +326,7 @@ module.exports = [
         category: "polls",
         required_params:[
             {key:"name",description:"The name of the poll."},
-            {key:"option",description:"The number of the option."},
+            {key:"option_num",description:"The number of the option."},
         ],
         optional_params:[],
         disabled: false,
