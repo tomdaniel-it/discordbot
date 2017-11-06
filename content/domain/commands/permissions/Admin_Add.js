@@ -14,7 +14,7 @@ module.exports = {
             return;
         }
 
-        var param = command.getParameters()[0].value;
+        var param = command.getParameters();
         var regex = /^<@!?(\d+)>$/;
         var userids = [];
 
