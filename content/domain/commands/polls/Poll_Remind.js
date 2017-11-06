@@ -17,7 +17,7 @@ module.exports = {
             return;
         }
 
-        var name = command.getParameters()[0].value;
+        var name = command.getParameters();
         if(pollmanager.get(serverid, name)===null){
             genericfunctions.sendErrorMessage(command, "There is no poll with that name.");
             return;

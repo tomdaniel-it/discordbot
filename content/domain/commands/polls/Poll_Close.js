@@ -17,7 +17,7 @@ module.exports = {
             return;
         }
 
-        var name = command.getParameters()[0].value;
+        var name = command.getParameters();
         var poll = pollmanager.get(serverid, name);
         var maxVotes = 0;
         var optionsWithMaxVotes = [];

@@ -18,18 +18,9 @@ module.exports = {
             return;
         }
 
-        var name = null;
-        var options = null;
         var params = command.getParameters();
-
-        for(var i=0;i<params.length;i++){
-            if(params[i].key === "name"){
-                name = params[i].value;
-            }else{
-                options = params[i].value;
-            }
-        }
-        
+        var name = params.split(" ")[0];
+        var options = (params === name ? null : params.substring(name.length+1));
         options = (options === null ? null : options.split(";"));
 
         try{

@@ -18,8 +18,8 @@ module.exports = {
         }
 
         var params = command.getParameters();
-        var name = (params[0].key==="name"?params[0].value:params[1].value);
-        var option = (params[0].key==="option"?params[0].value:params[1].value);
+        var name = params.split(" ")[0];
+        var option = params.substring(name.length+1);
         option = Number(option);
         if(isNaN(option)){
             genericfunctions.sendErrorMessage(command, "option must be the number of the option to vote to");
