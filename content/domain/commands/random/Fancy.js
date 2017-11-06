@@ -11,17 +11,26 @@ module.exports = {
         var fontWanted = false;
         var decorationWanted = false;
 
+        params = params.split(" ");
+        var style = "";
+        var last = params.length - 1;
+        if(params[0].toLowerCase() === "f" || params[0].toLowerCase() === "d" || params[0].toLowerCase() === "df" || params[0].toLowerCase() === "fd"){
+            style = params[0].toLowerCase();
+            params.shift();
+        }else if(params[last].toLowerCase() === "f" || params[last].toLowerCase() === "d" || params[last].toLowerCase() === "df" || params[last].toLowerCase() === "fd"){
+            style = params[last].toLowerCase();
+            params.pop();
+        }
+        if(style.indexOf("f") !== -1){
+            fontWanted = true;
+        }
+        if(style.indexOf("d") !== -1){
+            decorationWanted = true;
+        }
 
-        for(var i=0;i<2;i++){
-            if(params[i].key=="style"){
-                if(params[i].value.indexOf('f')!==-1) fontWanted = true;
-                if(params[i].value.indexOf('d')!==-1) decorationWanted = true;
-            }else if(params[i].key=="message"){
-                message = params[i].value;
-            }else{
-                genericfunctions.sendErrorMessage(command, "Something went wrong :/");
-                return;
-            }
+        for(var i=0;i<params.length;i++){
+            if(i !== 0) message += " ";
+            message += params[i];
         }
         
         if(fontWanted){
@@ -37,8 +46,6 @@ module.exports = {
                 }
             }
         }
-
-
 
         if(decorationWanted){
             //ADD RANDOMLY CHOSEN DECORATION TO BEGINNING & ENDING OF MESSAGE
