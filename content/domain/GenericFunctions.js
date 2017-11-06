@@ -1,6 +1,18 @@
 var commandlist = require('../storage/commands.js');
 var pollmanager = require('../domain/PollManager.js');
 
+function arrayToString(arr, seperator){
+    if(seperator === undefined || seperator === null){
+        seperator = "";
+    }
+    var str = "";
+    for(var i=0;i<arr.length;i++){
+        if(i!==0) str += seperator;
+        str += arr[i];
+    }
+    return str;
+}
+
 module.exports = {
     sendErrorMessage: function(command, content){
         var timeUntilDeletion = require('../../settings.js').error_message_time_until_deletion; //IN SECONDS
@@ -106,10 +118,17 @@ module.exports = {
         }
         return;
     },
-    getUserId: function(command, guild, user_mention_or_name){
+    getUserId: function(command, guild, user_mention_or_name, quiet){
+        if(quiet === undefined || quiet === null){
+            quiet = false;
+        }
         if(guild === undefined || guild === null || guild.members === undefined ||guild.members === null){
-            module.exports.sendErrorMessage(command, "This command is only available in a discord server.");
-            return;
+            if(!quiet){
+                module.exports.sendErrorMessage(command, "This command is only available in a discord server.");
+                return;
+            }else{
+                return null;
+            }
         }
         var regex = /^<@!?(\d+)>$/;
         var userid = null;
@@ -132,10 +151,33 @@ module.exports = {
                 }
             }
             if(userid === null){
-                module.exports.sendErrorMessage(command, "No user was found with this username.");
-                return;
+                if(!quiet){
+                    module.exports.sendErrorMessage(command, "No user was found with this username.");
+                    return;
+                }else{
+                    return null;
+                }
             }
         }
         return userid;
+    },
+    seperateUserFromText: function(command, guild, text){ //RETURNS [userid, othertext]
+        var words = text.split(" ");
+        for(var i=0;i<words.length;i++){
+            var user = "";
+            var newwords = JSON.parse(JSON.stringify(words));
+            for(var j=i;j<words.length;j++){
+                if(j!==i) user += " ";
+                user += words[j];
+                newwords.splice(newwords.indexOf(words[j]), 1);
+                if(i===0){
+                    var userid = module.exports.getUserId(command, guild, user, true);
+                    if(userid !== undefined && userid !== null) return [userid, arrayToString(newwords, " ")];
+                }
+            }
+            var userid = module.exports.getUserId(command, guild, user, true);
+            if(userid !== undefined && userid !== null) return [userid, arrayToString(newwords, " ")];
+        }
+        return [null, text];
     }
 }
