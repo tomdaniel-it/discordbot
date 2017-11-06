@@ -10,40 +10,24 @@ module.exports = {
             return;
         }
         var langcode = "en";
+        var langs = [["english", "en"],["french", "fr-FR"],["dutch", "nl-NL"],["german", "de-DE"],["korean", "ko-KR"],["russian", "ru-RU"],["italian", "it-IT"],["spanish", "es-AR"]];
         var params = command.getParameters();
-        
-        // Only try to join the sender's voice channel if they are in one themselves
-        if(params.length!==1){
-            var lang = (params[0].key==="lang"?params[0].value:params[1].value);
-            switch(lang.toLowerCase().trim()){
-                case "english":
-                    langcode = "en";
-                    break;
-                case "french":
-                    langcode = "fr-FR";
-                    break;
-                case "dutch":
-                    langcode = "nl-NL";
-                    break;
-                case "german":
-                    langcode = "de-DE";
-                    break;
-                case "korean":
-                    langcode = "ko-KR";
-                    break;
-                case "russian":
-                    langcode = "ru-RU";
-                    break;
-                case "italian":
-                    langcode = "it-IT";
-                    break;
-                case "spanish":
-                    langcode = "es-AR";
-                    break;
-                default:
-                    return;
+
+        //SETTING LANGCODE IF SET
+        var firstparam = params.split(" ")[0];
+        var lastparam = params.split(" ")[params.split(" ").length-1];
+        for(var i=0;i<langs.length;i++){
+            if(firstparam.toLowerCase().trim() === langs[i][0]){
+                langcode = langs[i][1];
+                params = params.substring(params.split(" ")[0].length+1);
+                break;
             }
-        }
+            if(lastparam.toLowerCase().trim() === langs[i][0]){
+                langcode = langs[i][1];
+                params = params.substring(0, params.length - params.split(" ")[params.split(" ").length-1].length-1);
+                break;
+            }
+        }        
 
         //CHECK IF MUSICBOT IS PLAYING, IF SO, CANCEL
         if(playlist.isPlaying(serverid)){
@@ -56,7 +40,7 @@ module.exports = {
             .then(connection => { // Connection is an instance of VoiceConnection
                 var googleTTS = require('google-tts-api');
                 
-                googleTTS(command.getParameters()[0].value, langcode, 1)   // speed normal = 1 (default), slow = 0.24
+                googleTTS(params, langcode, 1)   // speed normal = 1 (default), slow = 0.24
                 .then(function (url) {
                     const streamOptions = { seek: 0, volume: 1 };
                     const dispatcher = connection.playStream(url, streamOptions);
