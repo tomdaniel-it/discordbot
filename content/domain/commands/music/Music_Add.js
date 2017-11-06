@@ -36,44 +36,32 @@ function removePickerListItem(serverid){
 module.exports = {
     getPickerListItem: getPickerListItem, 
     execute: function(command){
-        var url = null;
-        var search = null;
         var position = null;
 
         var serverid = command.getMessage().guild.id.toString();
         var params = command.getParameters();
+        params = params.replace(/ +(?= )/g,'');
 
         if(serverid===undefined || serverid===null || serverid.length===0){
             genericfunctions.sendErrorMessage(command, "This command is only available in a discord server.");
             return;
         }
 
-        for(var i=0;i<params.length;i++){
-            switch(params[i].key.toLowerCase()){
-                case "url":
-                    url = params[i].value;
-                    break;
-                case "search":
-                    search = params[i].value;
-                    break;
-                case "position":
-                    position = Number(params[i].value);
-                    if(isNaN(position)){
-                        genericfunctions.sendErrorMessage(command, "Position must be a number.");
-                        return;
-                    }
-                    break;
-            }
+        var lastword = params.split(" ")[params.split(" ").length-1];
+        if(!isNaN(lastword)){
+            position = Number(lastword);
+            params = params.substring(lastword.length+1);
         }
 
-        if((url===null && search===null) || (url!==null && search!==null)){
-            genericfunctions.sendErrorMessage(command, "You must include -url OR -search in the command '" + require('../../../../settings.js').command_prefix + "music_add'.");
+        var regex = /youtube\.com\/watch\?v=([a-zA-Z0-9\-\_]+)/;
+        if(regex.test(params) && params.split(" ").length > 1){
+            genericfunctions.sendErrorMessage(command, "You must include a youtube url OR title in the command '" + require('../../../../settings.js').command_prefix + "music_add'.");
             return;
         }
 
         //METHOD = URL
-        if(url !== null){
-            yt_api.getInfo(url).on('ready', (song, err)=>{
+        if(regex.test(params)){
+            yt_api.getInfo(params).on('ready', (song, err)=>{
                 if(err){
                     //URL INCORRECT
                     genericfunctions.sendErrorMessage(command, "Provided url was incorrect, please use YouTube urls of songs.");
@@ -92,14 +80,14 @@ module.exports = {
         }
 
         //METHOD = SEARCH
-        if(search !== null){
-            yt_api.getSearchResults(search).on('ready', result=>{
+        if(!regex.test(params)){
+            yt_api.getSearchResults(params).on('ready', result=>{
                 if(result === null || result.length === 0){
                     genericfunctions.sendErrorMessage(command, "No songs found with that title");
                     return;
                 }
 
-                var msg = "Results for " + search + ":";
+                var msg = "Results for " + params + ":";
                 msg += "\n```";
                 for(var i=0;i<result.length;i++){
                     msg += "\n" + (i+1) + ". " +  result[i].title + " (" + result[i].duration + ")";

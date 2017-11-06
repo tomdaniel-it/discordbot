@@ -113,7 +113,7 @@ module.exports = {
     getInfo: function(url){
         var em = new emitter();
         setTimeout(function(){
-            var regex = /v=([a-zA-Z0-9]+)/;
+            var regex = /v=([a-zA-Z0-9\-\_]+)/;
             if(!regex.test(url)){
                 em.emit('ready', null, new Error("Youtube url is incorrect."));
                 return;
