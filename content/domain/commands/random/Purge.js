@@ -8,14 +8,33 @@ module.exports = {
         }
         var message = command.getMessage();
         var params = command.getParameters();
-        if(params.length===0){
+        var amount = null;
+        var user = null;
+        if(params.length !== 0){
+            if(params.split(" ").length > 0 && !isNaN(params.split(" ")[0])){
+                //FIRST ARG = AMOUNT
+                amount = Number(params.split(" ")[0])+1;
+                if(params.split(" ").length > 1){
+                    user = params.substring(params.split(" ")[0].length+1);
+                }
+            }else if(params.split(" ").length > 0 && !isNaN(params.split(" ")[params.split(" ").length-1])){
+                //LAST ARG = AMOUNT
+                amount = Number(params.split(" ")[params.split(" ").length-1])+1;
+                user = params.substring(0, params.length - params.split(" ")[params.split(" ").length-1].length-1);
+            }else{
+                //AMOUNT ISN'T STATED
+                user = params;
+            }
+        }
+
+        if(amount === null && user === null){
             //DELETE ALL MESSAGES OF CHANNEL
             message.channel.fetchMessages().then(messages => message.channel.bulkDelete(messages));
             return;
         }
-        if(params.length===1&&params[0].key==="amount"){
+        if(user === null && amount !== null){
             //DELETE X MESSAGES OF CHANNEL
-            var messagecount = Math.floor(Number(params[0].value))+1;
+            var messagecount = amount;
             if(isNaN(messagecount)){
                 genericfunctions.sendErrorMessage(command, "Purge amount requires a number of messages to delete.");
                 return;
@@ -37,13 +56,15 @@ module.exports = {
             });
             return;
         }
-        if(params.length===1&&params[0].key==="user"){
+        if(amount === null && user !== null){
             //MAKE IT ONLY DELETE COMMENTS OF SPECIFIC USER
             message.channel.fetchMessages().then(messages=>{
                 messages = messages.array();
                 var messagesToDelete = [];
+                var userid = genericfunctions.getUserId(command, command.getMessage().guild, user);
+                if(userid === undefined || userid === null) return;
                 for(var i=0;i<messages.length;i++){
-                    if(messages[i].author.username.toLowerCase()===params[0].value.toLowerCase() || (params[0].value.length>3 && messages[i].author.id===params[0].value.substring(2, params[0].value.length-1))){
+                    if(messages[i].author.id===userid){
                         messagesToDelete.push(messages[i]);
                     }
                 }
@@ -54,17 +75,7 @@ module.exports = {
         }
 
         //DELETE MESSAGES WITH LIMIT AND ONLY FROM SPECIFIC USER TODO
-        var user;
-        var messagecount;
-        if(params[0].key==="user"){
-            user = params[0].value;
-            messagecount = params[1].value;
-        }else{
-            messagecount = params[0].value;
-            user = params[1].value;
-        }
-
-        messagecount = Math.floor(Number(messagecount))+1;
+        messagecount = amount;
         
         if(isNaN(messagecount)){
             genericfunctions.sendErrorMessage(command, "Purge amount requires a number of messages to delete.");
@@ -81,9 +92,11 @@ module.exports = {
         message.channel.fetchMessages().then(messages=>{
             messages = messages.array();
             var messagesToDelete = [];
+            var userid = genericfunctions.getUserId(command, command.getMessage().guild, user);
+            if(userid === undefined || userid === null) return;
             var counter = 0;
             for(var i=0;i<messages.length;i++){
-                if(messages[i].author.username.toLowerCase()===user.toLowerCase() || (user.length>3 && messages[i].author.id===user.substring(2, user.length-1))){
+                if(messages[i].author.id===userid){
                     messagesToDelete.push(messages[i]);
                     counter++;
                     if(counter == messagecount) break;
