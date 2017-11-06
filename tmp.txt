@@ -1,0 +1,28 @@
+ping
+help [command]
+insult [user]
+meme
+fancy <style> <message>
+purge [amount] [user]
+say <message> [lang]
+coinflip
+music_play
+music_stop
+music_add <url|title> [position]
+music_pick <num>
+music_skip
+music_purge [amount]
+music_list
+admin_add <user>
+admin_remove <user>
+admin_list
+admin_commands
+poll_create <name> [option1;...]
+poll_close <name>
+poll_list
+poll_remind <name>
+poll_vote <name> <option_num>
+poll_unvote <name> <option_num>
+poll_add_option <name> <option>
+poll_remove_option <name> <option_num>
+remind <user> <message> [anonymous]
