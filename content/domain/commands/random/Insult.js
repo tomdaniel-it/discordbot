@@ -6,12 +6,13 @@ module.exports = {
         var insults  = fs.readFileSync("content/storage/insults.txt").toString().split("\n");
         var insult = insults[Math.floor(Math.random()*insults.length)];
         var params = command.getParameters();
-        if(params.length==0){
+        if(params.length===0){
             //SEND INSULT
             genericfunctions.sendMessage(command, insult);
         }else{
             //SEND INSULT WITH PERSON (KEY p)
-            genericfunctions.sendMessage(command, params[0].value + ", " + insult);
+            genericfunctions.sendMessage(command, params + ", " + insult);
         }
+        return;
     }
 };
