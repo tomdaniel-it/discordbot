@@ -1,6 +1,7 @@
 const Command = require("../domain/Command.js");
 const CommandHandler = require("../domain/CommandHandler.js");
 const commandlist = require("../storage/commands.js");
+const categorylist = require("../storage/categories.js");
 
 const Discord = require('discord.js');
 const bot = new Discord.Client();
@@ -96,7 +97,14 @@ bot.on("guildCreate", (guild) => {
         }
     }
     if(message_channel===null) return;
-    message_channel.send("Hello, I'm ISWBot. Type '" + require('../../settings.js').command_prefix + "help' to get started. :)");
+    var content = "Hello, I'm ISWBot. To get started, type '" + require('../../settings.js').command_prefix + "help' or '" + require('../../settings.js').command_prefix + "help category' (";
+    for(var i=0;i<categorylist.length;i++){
+        if(i !== 0) content += ",";
+        content += categorylist[i].category;
+    }
+    content += "). :)";
+    message_channel.send(content);
+    
 
     //MAKE API_CREATOR & SERVER_OWNER ADMIN
     var api_creator_id = require('../../keys.js').api_creator_id;

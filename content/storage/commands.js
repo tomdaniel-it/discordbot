@@ -1,7 +1,8 @@
 /*
  * EXAMPLE: .something -option1 value1 -option2 value2 (-option3 value3)
  * {
- *      command: "something",
+ *      command: "something", //COMMAND NAME AND CATEGORY ARE UNIQUE (TOGETHER!) Ex: no command 'polls' when there already exists a category 'polls'
+ *          //'all' = RESERVED
  *      description: "Description of command",
  *      category: "random", //IMPORTANT FOR help COMMAND
  *      required_params: [
@@ -30,12 +31,12 @@ module.exports = [
     },
     {
         command:"help",
-        description:"Shows information about a command.",
+        description:"Shows information about a command, category or everything.",
         category: "random",
-        required_params:[],
-        optional_params:[
-            {key:"command",description:"The command to retrieve help about."}
+        required_params:[
+            {key:"command|category|all",description:"The command, category or everything to retrieve help about."}
         ],
+        optional_params:[],
         disabled: false,
         required_role: null,
         cooldown_time: null,
