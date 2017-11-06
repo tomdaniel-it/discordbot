@@ -27,6 +27,14 @@ module.exports = {
         return command.getMessage().channel.send(content);
     },
     sendPM: function(command, userid, content, deleteOriginal){
+        if(command.getMessage().author.id === userid){
+            command.getMessage().author.send(content);
+            if(deleteOriginal){
+                module.exports.deleteMessage(command.getMessage());
+            }
+            return;
+        }
+
         var guild = command.getMessage().guild;
         if(guild === undefined || guild === null){
             module.exports.sendErrorMessage(command, "This command is only available in a discord server.");
