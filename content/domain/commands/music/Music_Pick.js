@@ -3,7 +3,7 @@ var genericfunctions = require('../../GenericFunctions.js');
 module.exports = {
     execute: function(command){
         var serverid = command.getMessage().guild.id.toString();
-        var num = Number(command.getParameters()[0].value);
+        var num = Number(command.getParameters());
 
         if(serverid===undefined || serverid===null || serverid.length===0){
             genericfunctions.sendErrorMessage(command, "This command is only available in a discord server.");

@@ -12,10 +12,10 @@ module.exports = {
 
         var amount = null;
         var params = command.getParameters();
-        if(params!==null && params.length !== 0 && params[0] !== null && params[0].key === "amount"){
-            amount = Number(params[0].value);
+        if(params!==null && params.length !== 0){
+            amount = Number(params);
             if(isNaN(amount)){
-                genericfunctions.sendErrorMessage(command, "-amount must be a number.");
+                genericfunctions.sendErrorMessage(command, "[amount] must be a number.");
                 return;
             }
         }
