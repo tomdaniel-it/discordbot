@@ -50,7 +50,7 @@ module.exports = {
         var lastword = params.split(" ")[params.split(" ").length-1];
         if(!isNaN(lastword)){
             position = Number(lastword);
-            params = params.substring(lastword.length+1);
+            params = params.substring(0, params.length - lastword.length);
         }
 
         var regex = /youtube\.com\/watch\?v=([a-zA-Z0-9\-\_]+)/;
@@ -92,7 +92,7 @@ module.exports = {
                 for(var i=0;i<result.length;i++){
                     msg += "\n" + (i+1) + ". " +  result[i].title + " (" + result[i].duration + ")";
                 }
-                msg += "\n\nPick a song using '" + require('../../../../settings.js').command_prefix + "music_pick -num [1-x]'.";
+                msg += "\n\nPick a song using '" + require('../../../../settings.js').command_prefix + "music_pick <1-x>'.";
                 msg += "\n```";
                 genericfunctions.sendMessage(command, msg).then(original_message=>{
                     genericfunctions.deleteMessage(command.getMessage());
