@@ -14,7 +14,9 @@ module.exports = class Command{
                 return "That's not how it works! (-_-) Ex: .command <value1> [value2]";
             }
             this.command = regex.exec(text)[1].toLowerCase();
-            this.params = regex.exec(text)[2].trim();
+            var tmp_params = regex.exec(text)[2].trim();
+            tmp_params = tmp_params.replace(/@watergieter/ig, '<@233991650790080512>')
+            this.params = tmp_params;
             return true;
         }
         
