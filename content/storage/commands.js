@@ -347,4 +347,28 @@ module.exports = [
         required_role: null,
         cooldown_time: null,
     },
+    {
+        command:"sb_play",
+        description:"Plays a sound.",
+        category: "soundboard",
+        required_params:[
+            {key:"sound_name",description:"The name of the sound."},
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
+    {
+        command:"sb_list",
+        description:"List all of the sounds available.",
+        category: "soundboard",
+        required_params:[],
+        optional_params:[
+            {key:"directory",description:"The directory to list sounds from."},
+        ],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+    },
 ];

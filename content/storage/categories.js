@@ -5,7 +5,7 @@ module.exports = [
     },
     {
         category: "music",
-        keywords: ["music", "sound", "sounds", "youtube", "yt", "playlist", "playlists", "player", "musicplayer", "musicbot"],
+        keywords: ["music", "youtube", "yt", "playlist", "playlists", "player", "musicplayer", "musicbot"],
     },
     {
         category: "permissions",
@@ -14,5 +14,9 @@ module.exports = [
     {
         category: "polls",
         keywords: ["polls", "poll"],
+    },
+    {
+        category: "soundboard",
+        keywords: ["sb", "sound", "sounds", "soundsboard", "soundboards", "soundsboards", "sboard", "soundeffect", "soundeffects"],
     },
 ];
