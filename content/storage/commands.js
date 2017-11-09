@@ -51,7 +51,7 @@ module.exports = [
         ],
         disabled: false,
         required_role: null,
-        cooldown_time: 60,
+        cooldown_time: 86400,
     },
     {
         command:"meme",
