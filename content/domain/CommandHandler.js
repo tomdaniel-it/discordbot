@@ -93,6 +93,12 @@ module.exports = class CommandHandler{
             case "remind":
                 require(command_dir + 'remind.js').execute(this.command);
                 break;
+            case "sb_play":
+                require(command_dir + 'Sb_Play.js').execute(this.command);
+                break;
+            case "sb_list":
+                require(command_dir + 'Sb_List.js').execute(this.command);
+                break;
             default:
                 return;
         }
