@@ -79,8 +79,8 @@ bot.on('message', message=>{ //MESSAGE SENT
     //HANDLE COMMAND
     commandhandler = new CommandHandler(command);
     commandhandler.run();
-    
-    
+
+
 });
 
 bot.on("guildCreate", (guild) => {
@@ -130,7 +130,7 @@ function isValidInput(command, parameters){
     if(commandItem.disabled) return "The command " + prefix + command + " is disabled.";
 
     //CHECK FOR REQUIRED PARAMETERS
-    if(commandItem.required_params.length > 0 && commandItem.required_params.length > parameters.split(' ').length){
+    if(commandItem.required_params.length > 0 && (commandItem.required_params.length > parameters.split(' ').length || parameters === "")){
         var cont = "Missing required parameters for '" + prefix + command + "'. Use '" + prefix + "help " + command + "' for more information.";
         return cont;
     }
