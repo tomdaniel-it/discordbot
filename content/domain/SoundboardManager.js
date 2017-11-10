@@ -28,10 +28,10 @@ function getJSON(options, onResult)
     req.end();
 };
 
-var optionsSearch = {
-    host: 'www.googleapis.com',
-    port: 443,
-    path: '/youtube/v3/search?maxResults=5&part=snippet&q={question}&type=&order=relevance&key=' + require('../../keys.js').youtube_api_key,
+var options = {
+    host: 'm.isw',
+    port: 80,
+    path: '/api/sb/{sound}',
     method: 'GET',
     headers: {
         'Content-Type': 'application/json'
@@ -40,10 +40,30 @@ var optionsSearch = {
 
 module.exports = {
     get: function(directory){
-        if(directory === undefined) directory = null;
-
+        var em = new emitter();
+        setTimeout(function(){
+            if(directory === undefined) directory = null;
+            var newoptions = JSON.parse(JSON.stringify(options));
+            if(directory !== null){
+                newoptions.path = newoptions.path.replace("{sound}", directory);
+            }else{
+                newoptions.path = newoptions.path.replace("{sound}", "");
+            }
+            getJSON(newoptions, (statusCode, result)=>{
+                em.emit("ready", result);
+            });
+        }, 1);
+        return em;
     },
     play: function(sound){
-
+        var em = new emitter();
+        setTimeout(function(){
+            var newoptions = JSON.parse(JSON.stringify(options));
+            newoptions.path = newoptions.path.replace("{sound}", sound);
+            getJSON(newoptions, (statusCode, result)=>{
+                em.emit("ready", result);
+            });
+        }, 1);
+        return em;
     }
 };
