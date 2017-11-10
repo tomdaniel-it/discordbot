@@ -33,10 +33,10 @@ module.exports = [
         command:"help",
         description:"Shows information about a command, category or everything.",
         category: "random",
-        required_params:[
+        required_params:[],
+        optional_params:[
             {key:"command|category|all",description:"The command, category or everything to retrieve help about."}
         ],
-        optional_params:[],
         disabled: false,
         required_role: null,
         cooldown_time: null,
