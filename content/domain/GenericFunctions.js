@@ -1,5 +1,6 @@
 var commandlist = require('../storage/commands.js');
 var pollmanager = require('../domain/PollManager.js');
+var logmanager = require('./LogManager.js');
 
 function arrayToString(arr, seperator){
     if(seperator === undefined || seperator === null){
@@ -179,5 +180,22 @@ module.exports = {
             if(userid !== undefined && userid !== null) return [userid, arrayToString(newwords, " ")];
         }
         return [null, text];
+    },
+    logMessage: function(command){
+        var serverid = "undefined";
+        if(command.getMessage().guild !== undefined && command.getMessage().guild !== null){
+            serverid = command.getMessage().guild.id;
+        }
+        logmanager.logMessage(serverid, command.getMessage().author.username, command.getMessage().content);
+    },
+    logError: function(command, error){
+        var serverid = "undefined";
+        if(command.getMessage().guild !== undefined && command.getMessage().guild !== null){
+            serverid = command.getMessage().guild.id;
+        }
+        logmanager.logError(serverid, command.getMessage().author.username, command.getMessage().content, error);
+    },
+    logDirectError: function(content){
+        logmanager.logDirectError(content);
     }
 }
