@@ -9,6 +9,8 @@ var prefix = require('../../settings.js').command_prefix;
 var genericfunctions = require("../domain/GenericFunctions.js");
 var rolemanager = require('../domain/RoleManager.js');
 var cooldownmanager = require('../domain/CooldownManager.js');
+var iswservicemanager = require('../domain/IswServiceManager.js');
+var settings = require('../../settings.js');
 var result;
 
 var events = require('events'),
@@ -22,6 +24,21 @@ bot.on('ready', ()=>{ //BOT LAUNCHED
     console.log('Bot launched...');
     bot.user.setStatus('Online'); //Status: 'Online', 'idle', 'invisible', 'dnd'
     bot.user.setGame("'.help' for info") //Will display 'Playing xxx' under bot name
+    if(settings.isw_service_warning_enabled){
+        var isw_guild = null;
+        var isw_guild_id = settings.isw_discord_server_id;
+        var guilds = bot.guilds.array();
+        for(var i=0;i<guilds.length;i++){
+            if(guilds[i].id.toString() === isw_guild_id){
+                isw_guild = guilds[i];
+            }
+        }
+        if(isw_guild === null){
+            console.log("Warning: Can't enable isw_service_warner because bot can't find the guild of ISW.");
+        }else{
+            iswservicemanager.run(isw_guild);
+        }
+    }
 });
 
 process.on('unhandledRejection', (reason, p) => {
@@ -119,7 +136,7 @@ bot.on("guildCreate", (guild) => {
             }
         }
         if(message_channel===null) return;
-        var content = "Hello, I'm ISWBot. To get started, type '" + require('../../settings.js').command_prefix + "help' or '" + require('../../settings.js').command_prefix + "help category' (";
+        var content = "Hello, I'm ISWBot. To get started, type '" + settings.command_prefix + "help' or '" + settings.command_prefix + "help category' (";
         for(var i=0;i<categorylist.length;i++){
             if(i !== 0) content += ",";
             content += categorylist[i].category;
@@ -193,7 +210,7 @@ function validateIswOnly(command, guild){
     if(guild === undefined || guild === null || guild.id === undefined || guild.id === null){
         return "This command can only be used in the discord server of ISW.";
     }
-    if(guild.id.toString() !== require('../../settings.js').isw_discord_server_id){
+    if(guild.id.toString() !== settings.isw_discord_server_id){
         return "This command can only be used in the discord server of ISW.";
     }
     return true;
