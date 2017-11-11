@@ -357,7 +357,7 @@ module.exports = [
         optional_params:[],
         disabled: false,
         required_role: null,
-        cooldown_time: null,
+        cooldown_time: 300,
     },
     {
         command:"sb_list",
