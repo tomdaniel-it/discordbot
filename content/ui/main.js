@@ -27,6 +27,7 @@ bot.on('ready', ()=>{ //BOT LAUNCHED
 process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
     // application specific logging, throwing an error, or other logic here
+    genericfunctions.logDirectError('Unhandled Rejection at: Promise' + JSON.stringify(p), 'reason:', JSON.stringify(reason));
   });
 
 bot.on('message', message=>{ //MESSAGE SENT
@@ -40,24 +41,34 @@ bot.on('message', message=>{ //MESSAGE SENT
         genericfunctions.logMessage(command);
 
         try{
+            //CHECK IF USAGE OF COMMAND & PARAMETERS IS CORRECT
             if(result!==true){
                 genericfunctions.sendErrorMessage(command, result);
                 return;
             }
-    
+            
+            //CHECK IF COMMAND USAGE IS CORRECT
             result = isValidInput(command.getCommand(), command.getParameters());
+            if(result!==true){
+                genericfunctions.sendErrorMessage(command, result);
+                return;
+            }
+
+            result = validateIswOnly(command.getCommand(), command.getMessage().guild);
             if(result!==true){
                 genericfunctions.sendErrorMessage(command, result);
                 return;
             }
     
             if(command.getMessage().guild !== null){
+                //CHECK IF USER HAS NEEDED PERMISSIONS
                 result = hasPermissionsForCommand(command.getMessage().guild.id, command.getCommand(), command.getMessage().author.id);
                 if(!result){
                     genericfunctions.sendErrorMessage(command, "You do not have permissions to use this command.");
                     return;
                 }
     
+                //CHECK COOLDOWN
                 result = isOnCooldown(command.getMessage().guild.id, command.getCommand(), command.getMessage().author.id);
                 if(result){
                     var cooldown = cooldownmanager.getCooldownTimeOfCommand(command.getCommand()); //IN SECONDS
@@ -167,4 +178,23 @@ function hasPermissionsForCommand(serverid, command, userid){
 function isOnCooldown(serverid, command, author_id){
     serverid = serverid.toString();
     return cooldownmanager.isOnCooldown(serverid, author_id, command);
+}
+
+function validateIswOnly(command, guild){
+    var commandObj = null;
+    for(var i=0;i<commandlist.length;i++){
+        if(commandlist[i].command === command.toLowerCase()){
+            commandObj = commandlist[i];
+        }
+    }
+    if(commandObj === null || !commandObj.isw_only){
+        return true;
+    }
+    if(guild === undefined || guild === null || guild.id === undefined || guild.id === null){
+        return "This command can only be used in the discord server of ISW.";
+    }
+    if(guild.id.toString() !== require('../../settings.js').isw_discord_server_id){
+        return "This command can only be used in the discord server of ISW.";
+    }
+    return true;
 }

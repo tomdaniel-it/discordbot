@@ -14,7 +14,8 @@
  *      ],
  *      disabled: false, //IF true => COMMAND CAN'T BE USED BY ANYONE
  *      required_role: null, //NULL => EVERYONE CAN USE IT, STRING => EVERYONE WITH THAT ROLE CAN USE IT (Example: "admin")
- *      cooldown_time: null //NULL OR 0 => NO COOLDOWN, EX: 300 (IN SECONDS) => 5 MINUTE COOLDOWN PER USER
+ *      cooldown_time: null, //NULL OR 0 => NO COOLDOWN, EX: 300 (IN SECONDS) => 5 MINUTE COOLDOWN PER USER
+ *      isw_only: false, //TRUE => COMMAND CAN ONLY BE USED IN ISW DISCORD SERVER
  * }
 */
 
@@ -28,6 +29,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"help",
@@ -40,6 +42,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"insult",
@@ -52,6 +55,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: 86400,
+        isw_only: false,
     },
     {
         command:"meme",
@@ -62,6 +66,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"fancy",
@@ -75,6 +80,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"purge",
@@ -88,6 +94,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"say",
@@ -101,6 +108,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"coinflip",
@@ -111,6 +119,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"music_play",
@@ -121,6 +130,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"music_stop",
@@ -131,6 +141,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"music_add",
@@ -145,6 +156,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"music_pick",
@@ -157,6 +169,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"music_skip",
@@ -167,6 +180,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"music_purge",
@@ -179,6 +193,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"music_list",
@@ -189,6 +204,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"admin_add",
@@ -201,6 +217,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"admin_remove",
@@ -213,6 +230,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"admin_list",
@@ -223,6 +241,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"admin_commands",
@@ -233,6 +252,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"poll_create",
@@ -247,6 +267,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"poll_close",
@@ -259,6 +280,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"poll_list",
@@ -269,6 +291,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"poll_remind",
@@ -281,6 +304,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"poll_vote",
@@ -294,6 +318,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"poll_unvote",
@@ -307,6 +332,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"poll_add_option",
@@ -320,6 +346,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"poll_remove_option",
@@ -333,6 +360,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"remind",
@@ -346,6 +374,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
     {
         command:"sb_play",
@@ -358,6 +387,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: 300,
+        isw_only: true,
     },
     {
         command:"sb_list",
@@ -370,5 +400,6 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        isw_only: false,
     },
 ];

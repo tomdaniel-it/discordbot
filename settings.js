@@ -3,4 +3,5 @@ module.exports = {
     memes_directory: __dirname + "/content/storage/memes/",
     command_prefix: ".", //SINGLE CHAR REQUIRED!
     discord_invite: "https://discordapp.com/oauth2/authorize?client_id=368465430924230670&scope=bot&permissions=2146958591",
+    isw_discord_server_id: "233315669683339264",
 };
