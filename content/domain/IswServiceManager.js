@@ -262,6 +262,6 @@ module.exports = {
         defineServerMembers(isw_guild);
         setInterval(function(){
             checkServices();
-        }, 2000); //60000
+        }, 60000);
     }
 };
