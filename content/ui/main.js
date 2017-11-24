@@ -24,20 +24,24 @@ bot.on('ready', ()=>{ //BOT LAUNCHED
     console.log('Bot launched...');
     bot.user.setStatus('Online'); //Status: 'Online', 'idle', 'invisible', 'dnd'
     bot.user.setGame("'.help' for info") //Will display 'Playing xxx' under bot name
-    if(settings.isw_service_warning_enabled){
-        var isw_guild = null;
-        var isw_guild_id = settings.isw_discord_server_id;
-        var guilds = bot.guilds.array();
-        for(var i=0;i<guilds.length;i++){
-            if(guilds[i].id.toString() === isw_guild_id){
-                isw_guild = guilds[i];
+    try{
+        if(settings.isw_service_warning_enabled){
+            var isw_guild = null;
+            var isw_guild_id = settings.isw_discord_server_id;
+            var guilds = bot.guilds.array();
+            for(var i=0;i<guilds.length;i++){
+                if(guilds[i].id.toString() === isw_guild_id){
+                    isw_guild = guilds[i];
+                }
+            }
+            if(isw_guild === null){
+                console.log("Warning: Can't enable isw_service_warner because bot can't find the guild of ISW.");
+            }else{
+                iswservicemanager.run(isw_guild);
             }
         }
-        if(isw_guild === null){
-            console.log("Warning: Can't enable isw_service_warner because bot can't find the guild of ISW.");
-        }else{
-            iswservicemanager.run(isw_guild);
-        }
+    }catch(err){
+        genericfunctions.logDirectError(err.message);
     }
 });
 

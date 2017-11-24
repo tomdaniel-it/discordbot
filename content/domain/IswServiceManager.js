@@ -2,6 +2,7 @@
 var http = require("http");
 var https = require("https");
 var emitter = require('events').EventEmitter;
+var genericfunctions = require('../domain/GenericFunctions.js');
 
 function getJSON(options, onResult)
 {
@@ -259,9 +260,18 @@ function checkServices(){
 
 module.exports = {
     run: function(isw_guild){
-        defineServerMembers(isw_guild);
+        try{
+            defineServerMembers(isw_guild);
+        }catch(err){
+            genericfunctions.logDirectError(err.message);
+            return;
+        }
         setInterval(function(){
-            checkServices();
+            try{
+                checkServices();
+            }catch(err){
+                genericfunctions.logDirectError("Something went wrong checking isw services, smokeping is probably offline. Error: " + err.message);
+            }
         }, 300000);
     }
 };
