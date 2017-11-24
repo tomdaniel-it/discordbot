@@ -9,7 +9,7 @@ module.exports = {
 
     //ISW
     isw_discord_server_id: "233315669683339264",
-    isw_service_warning_enabled: false, //FALSE => NOBODY WILL RECEIVE PM'S ABOUT SERVICES THAT ARE DOWN
+    isw_service_warning_enabled: true, //FALSE => NOBODY WILL RECEIVE PM'S ABOUT SERVICES THAT ARE DOWN
     isw_service_managers: [ //USERS TO RECEIVE NOTIFICATIONS ABOUT DOWN SERVICES => SERVERS & SITES
         "233991650790080512", //PIETER
         "256795273546694658", //TIEBE
