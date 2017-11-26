@@ -16,10 +16,6 @@ var result;
 var events = require('events'),
 util = require('util');
 
-process
-.once('SIGINT', () => process.exit(1))
-.once('SIGTERM', () => process.exit(1));
-
 bot.on('ready', ()=>{ //BOT LAUNCHED
     console.log('Bot launched...');
     bot.user.setStatus('Online'); //Status: 'Online', 'idle', 'invisible', 'dnd'
@@ -46,9 +42,13 @@ bot.on('ready', ()=>{ //BOT LAUNCHED
 });
 
 process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
-    // application specific logging, throwing an error, or other logic here
-    genericfunctions.logDirectError('Unhandled Rejection at: Promise' + JSON.stringify(p), 'reason:', JSON.stringify(reason));
+    try{
+        console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+        // application specific logging, throwing an error, or other logic here
+        genericfunctions.logDirectError('Unhandled Rejection at: Promise' + JSON.stringify(p), 'reason:', JSON.stringify(reason));
+    }catch(err){
+        genericfunctions.logDirectError(err.message);
+    }
   });
 
 bot.on('message', message=>{ //MESSAGE SENT
