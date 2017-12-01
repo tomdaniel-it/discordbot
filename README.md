@@ -10,6 +10,7 @@ node packages (npm install {name}):
   - googleapis
   - google-tts-api
   - ytdl-core
+  - apiai
   
 # Commands
 All commands can be found in: [content/storage/commands.js](content/storage/commands.js)
