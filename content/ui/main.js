@@ -10,6 +10,7 @@ var genericfunctions = require("../domain/GenericFunctions.js");
 var rolemanager = require('../domain/RoleManager.js');
 var cooldownmanager = require('../domain/CooldownManager.js');
 var iswservicemanager = require('../domain/IswServiceManager.js');
+var aimanager = require("../domain/AIManager.js");
 var settings = require('../../settings.js');
 var result;
 
@@ -55,6 +56,9 @@ bot.on('message', message=>{ //MESSAGE SENT
     try{
         if(message.author.id === '368465430924230670') return;
         if(message.system) return;
+        if(message.channel.type === 'dm' && message.content.indexOf(prefix)!==0){
+            aimanager.sendMessage(message);
+        }
         if(message.content.indexOf(prefix)!==0) return;
 
         var command = new Command(message, prefix);
