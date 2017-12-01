@@ -160,8 +160,13 @@ function updateServices(offline_services){
                 break;
             }
         }
-        if(found)
+        if(found){
             newList.push(service_reminds[i]);
+        }else{
+            for(var i=0;i<isw_server_members.length;i++){
+                isw_server_members[i].send("The server: " + service_reminds[i].host_address + " is back up! Congratulations, you guys are great! :)");
+            }
+        }
     }
     service_reminds = newList;
 }
