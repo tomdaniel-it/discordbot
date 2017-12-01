@@ -35,6 +35,11 @@ module.exports = {
             return;
         }
 
+        if(params.length > 199){
+            genericfunctions.sendErrorMessage(command, "Text length should be less than 200 characters.");
+            return;
+        }
+
         if (message.member.voiceChannel) {
             message.member.voiceChannel.join()
             .then(connection => { // Connection is an instance of VoiceConnection
