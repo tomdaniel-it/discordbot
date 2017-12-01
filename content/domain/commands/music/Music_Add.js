@@ -66,6 +66,10 @@ module.exports = {
                     //URL INCORRECT
                     genericfunctions.sendErrorMessage(command, "Provided url was incorrect, please use YouTube urls of songs.");
                     return;
+                }else if(song.liveBroadcastContent !== "none"){
+                    //SONG IS LIVESTREAM, GIVES ERROR WHEN TRYING TO PLAY WHICH CANNOT BE CATCHED (YTDL)
+                    genericfunctions.sendErrorMessage(command, "I can't play livestreams, try playing another song.");
+                    return;
                 }
                 try{
                     playlist.add(serverid, song, position);
@@ -106,6 +110,11 @@ module.exports = {
                     em.on('picked', (curcommand, song, prev_message)=>{
                         //ADD PICKED SONG TO PLAYLIST
                         genericfunctions.deleteMessage(prev_message);
+                        if(song.liveBroadcastContent !== "none"){
+                            //SONG IS LIVESTREAM, GIVES ERROR WHEN TRYING TO PLAY WHICH CANNOT BE CATCHED (YTDL)
+                            genericfunctions.sendErrorMessage(curcommand, "I can't play livestreams, try playing another song.");
+                            return;
+                        }
                         try{
                             playlist.add(serverid, song, position);
                             genericfunctions.sendErrorMessage(curcommand, "Added song to playlist.");

@@ -54,7 +54,7 @@ function isoToString(iso){
 var optionsSearch = {
     host: 'www.googleapis.com',
     port: 443,
-    path: '/youtube/v3/search?maxResults=5&part=snippet&q={question}&type=&order=relevance&key=' + require('../../keys.js').youtube_api_key,
+    path: '/youtube/v3/search?maxResults=5&part=snippet&q={question}&type=video&videoType=any&order=relevance&key=' + require('../../keys.js').youtube_api_key,
     method: 'GET',
     headers: {
         'Content-Type': 'application/json'
@@ -101,6 +101,7 @@ module.exports = {
                         obj.url = "https://www.youtube.com/watch?v="+result.items[i].id;
                         obj.type = "yt";
                         obj.title = result.items[i].snippet.title;
+                        obj.liveBroadcastContent = result.items[i].snippet.liveBroadcastContent;
                         obj.duration = isoToString(result.items[i].contentDetails.duration);
                         res.push(obj);
                     }
@@ -140,6 +141,7 @@ module.exports = {
                 res.url = "https://www.youtube.com/watch?v="+id;
                 res.type = 'yt';
                 res.title = result.items[0].snippet.title;
+                res.liveBroadcastContent = result.items[0].snippet.liveBroadcastContent;
                 res.duration = isoToString(result.items[0].contentDetails.duration);
                 em.emit('ready', res);
             });
