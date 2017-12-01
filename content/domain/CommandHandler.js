@@ -99,6 +99,12 @@ module.exports = class CommandHandler{
             case "sb_list":
                 require(command_dir + 'Sb_List.js').execute(this.command);
                 break;
+            case "no":
+                require(command_dir + 'No.js').execute(this.command);
+                break;
+            case "wifi":
+                require(command_dir + 'Wifi.js').execute(this.command);
+                break;
             default:
                 return;
         }
