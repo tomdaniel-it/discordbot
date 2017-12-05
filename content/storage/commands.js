@@ -15,6 +15,7 @@
  *      disabled: false, //IF true => COMMAND CAN'T BE USED BY ANYONE
  *      required_role: null, //NULL => EVERYONE CAN USE IT, STRING => EVERYONE WITH THAT ROLE CAN USE IT (Example: "admin")
  *      cooldown_time: null, //NULL OR 0 => NO COOLDOWN, EX: 300 (IN SECONDS) => 5 MINUTE COOLDOWN PER USER
+        cooldown_time_isw_only: true, //TRUE => COOLDOWN TIME ONLY ENABLED FOR ISW CHANNEL
  *      isw_only: false, //TRUE => COMMAND CAN ONLY BE USED IN ISW DISCORD SERVER
  * }
 */
@@ -29,6 +30,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -42,6 +44,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -55,6 +58,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: 86400,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -66,6 +70,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -80,6 +85,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -94,6 +100,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -108,6 +115,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -119,6 +127,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -130,6 +139,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -141,6 +151,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -156,6 +167,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -169,6 +181,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -180,6 +193,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -193,6 +207,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -204,6 +219,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -217,6 +233,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -230,6 +247,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -241,6 +259,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -252,6 +271,7 @@ module.exports = [
         disabled: false,
         required_role: "admin",
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -267,6 +287,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -280,6 +301,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -291,6 +313,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -304,6 +327,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -318,6 +342,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -332,6 +357,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -346,6 +372,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -360,6 +387,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -374,6 +402,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -387,6 +416,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: 300,
+        cooldown_time_isw_only: true,
         isw_only: true,
     },
     {
@@ -400,6 +430,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -411,6 +442,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: false,
     },
     {
@@ -422,6 +454,7 @@ module.exports = [
         disabled: false,
         required_role: null,
         cooldown_time: null,
+        cooldown_time_isw_only: true,
         isw_only: true,
     },
 ];

@@ -201,6 +201,11 @@ function hasPermissionsForCommand(serverid, command, userid){
 }
 
 function isOnCooldown(serverid, command, author_id){
+    var cmd;
+    for(var i=0;i<commandlist.length;i++){
+        if(commandlist[i].command === command) cmd = commandlist[i];
+    }
+    if(cmd.cooldown_time_isw_only && serverid !== settings.isw_discord_server_id) return false;
     serverid = serverid.toString();
     return cooldownmanager.isOnCooldown(serverid, author_id, command);
 }
