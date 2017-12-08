@@ -57,7 +57,7 @@ module.exports = [
         ],
         disabled: false,
         required_role: null,
-        cooldown_time: 86400,
+        cooldown_time: 21600,
         cooldown_time_isw_only: true,
         isw_only: false,
     },
