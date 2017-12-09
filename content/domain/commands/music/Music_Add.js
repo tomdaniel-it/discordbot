@@ -53,7 +53,7 @@ module.exports = {
             params = params.substring(0, params.length - lastword.length);
         }
 
-        var regex = /youtube\.com\/watch\?v=([a-zA-Z0-9\-\_]+)/;
+        var regex = /youtube\.com\/watch\?.*v=([a-zA-Z0-9\-\_]+)/;
         if(regex.test(params) && params.split(" ").length > 1){
             genericfunctions.sendErrorMessage(command, "You must include a youtube url OR title in the command '" + require('../../../../settings.js').command_prefix + "music_add'.");
             return;
