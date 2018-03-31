@@ -21,7 +21,7 @@ module.exports = {
             genericfunctions.sendErrorMessage(command, "You need to be member of ISW to see the wifi password.");
             return;
         }
-        var pwd = require('../../../../settings.js').isw_wifi_password;
+        var pwd = require('../../../../keys.js').isw_wifi_password;
         command.getMessage().author.send("The wifi password of isw: " + pwd);
         command.getMessage().delete();
     }
