@@ -9,7 +9,7 @@ node packages (npm install {name}):
   - discord.js
   - googleapis
   - google-tts-api
-  - ytdl-core
+  - ytdl-core@latest
   - apiai
   
 # Commands
