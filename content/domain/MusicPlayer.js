@@ -7,7 +7,7 @@ module.exports = {
     play: function(connection, url, type){
         switch(type){
             case 'yt':
-                const stream = ytdl(encodeURI(url), { filter : 'audioonly' });
+                const stream = ytdl(url, { filter : 'audioonly' });
                 const dispatcher = connection.playStream(stream, streamOptions);
                 return dispatcher;
             default:
