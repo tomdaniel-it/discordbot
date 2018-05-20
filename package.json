@@ -1,0 +1,29 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "launcher.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomdaniel-it/discordbot"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apiai": "^4.0.3",
+    "discord.js": "^11.3.2",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "google-auth-library": "^0.11.0",
+    "google-tts-api": "0.0.2",
+    "googleapis": "^22.2.0",
+    "node-gyp": "^3.6.2",
+    "opusscript": "0.0.4",
+    "proper-lockfile": "^2.0.1",
+    "rebuild": "^0.1.2",
+    "ytdl-core": "^0.20.4"
+  }
+}
