@@ -95,7 +95,7 @@ module.exports = [
         required_params:[],
         optional_params:[
             {key:"amount",description:"The amount of messages to delete starting from the latest (excluding purge command) (MAX 99)."},
-            {key:"user", description:"Choose a specific person to delete messages from."}
+            {key:"user", description:"Choose a specific user to delete messages from."}
         ],
         disabled: false,
         required_role: "admin",
@@ -469,4 +469,33 @@ module.exports = [
         cooldown_time_isw_only: true,
         isw_only: true,
     },
+    {
+        command:"challenge",
+        description:"Challenge me or a user for a rock paper scissors game.",
+        category: "random",
+        required_params:[],
+        optional_params:[
+            {key:"player",description:"The @User to challenge."},
+            {key:"action",description:"Accept, deny or cancel a challenge with 'accept', 'deny' or 'cancel')"},
+        ],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+        cooldown_time_isw_only: true,
+        isw_only: false,
+    },
+    {
+        command:"challenge_select",
+        description:"Select your choice when playing a rock paper scissors challenge.",
+        category: "random",
+        required_params:[
+            {key:"choice",description:"Your choice: 'rock', 'paper' or 'scissors'"}
+        ],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+        cooldown_time_isw_only: true,
+        isw_only: false,
+    }
 ];

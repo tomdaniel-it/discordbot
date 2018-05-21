@@ -108,6 +108,12 @@ module.exports = class CommandHandler{
             case "wifi":
                 require(command_dir + 'Wifi.js').execute(this.command);
                 break;
+            case "challenge":
+                require(command_dir + 'Challenge.js').execute(this.command);
+                break;
+            case "challenge_select":
+                require(command_dir + 'Challenge_Select.js').execute(this.command);
+                break;
             default:
                 return;
         }

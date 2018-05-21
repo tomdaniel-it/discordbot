@@ -24,6 +24,7 @@ module.exports = {
         1440,
     ],
     isw_service_keep_reminding: true, //TRUE => MESSAGES WILL BE SENT USING LAST TIME INTERVAL UNTIL SERVICE IS UP
+    bot_name: "ISWBot",
 
 
 };
