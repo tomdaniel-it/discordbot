@@ -21,7 +21,7 @@ bot.on('ready', ()=>{ //BOT LAUNCHED
     console.log('Bot launched...');
     bot.user.setUsername(settings.bot_name);
     bot.user.setStatus('Online'); //Status: 'Online', 'idle', 'invisible', 'dnd'
-    bot.user.setGame("'.help' for info") //Will display 'Playing xxx' under bot name
+    bot.user.setActivity("'.help' for info") //Will display 'Playing xxx' under bot name
     try{
         if(settings.isw_service_warning_enabled){
             var isw_guild = null;
