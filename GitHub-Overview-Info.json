@@ -1,4 +1,4 @@
 {
-  "description": "A discord bot with various functionalities such as music, polls, etc.",
+  "description": "A discord bot with various functionalities such as streaming music from YouTube (using the YouTube Search API), add reminders for certain users, Permission Control and many others. You can even talk to him with its AI implementation using DialogFlow.",
   "image_url": "http://thechurchontheway.org/wp-content/uploads/2016/05/placeholder1.png"
 }
