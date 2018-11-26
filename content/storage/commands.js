@@ -458,6 +458,18 @@ module.exports = [
         isw_only: false,
     },
     {
+        command:"triggered",
+        description:"Gives a triggered meme.",
+        category: "random",
+        required_params:[],
+        optional_params:[],
+        disabled: false,
+        required_role: null,
+        cooldown_time: null,
+        cooldown_time_isw_only: true,
+        isw_only: false,
+    },
+    {
         command:"wifi",
         description:"Gives the wifi password of ISW in a private message.",
         category: "random",

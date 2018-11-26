@@ -105,6 +105,9 @@ module.exports = class CommandHandler{
             case "yes":
                 require(command_dir + 'Yes.js').execute(this.command);
                 break;
+            case "triggered":
+                require(command_dir + 'Triggered.js').execute(this.command);
+                break;
             case "wifi":
                 require(command_dir + 'Wifi.js').execute(this.command);
                 break;
